@@ -1,3 +1,3 @@
-# ifplusor's Library
+# ifplusor's library
 
-**👋 Welcome to ifplusor's Library!**
+**👋 Welcome to ifplusor's library!**
