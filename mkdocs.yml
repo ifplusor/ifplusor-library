@@ -3,6 +3,7 @@
 # mkdocs: https://www.mkdocs.org/user-guide/configuration/
 
 site_name: ifplusor's library
+site_url: https://library.ifplusor.win
 repo_name: ifplusor-library
 repo_url: https://github.com/ifplusor/ifplusor-library
 edit_uri: edit/main/docs/
