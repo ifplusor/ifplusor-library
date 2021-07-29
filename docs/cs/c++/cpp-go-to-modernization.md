@@ -51,7 +51,7 @@ tags: cpp cpp11 cpp14 cpp17 cpp20
 
 ## 2. 传统 C++ 的设计规则
 
-![The Evolution of C++](../../../attachments/cs/c++/the-evolution-of-cpp.png)
+![The Evolution of C++](the-evolution-of-cpp.png)
 
 ### 2.1. 设计目标（Aims）
 

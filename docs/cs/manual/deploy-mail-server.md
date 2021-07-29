@@ -28,7 +28,7 @@ tags: mail postfix dovecot
 
 在开始讲述本例的内容之前，我们先来看看Postfix+Dovecot+MySQL是如何相互协作以实现邮件服务器的各项功能。我们假设张三通过oschina.net的邮箱zhangsan@oschina.net发送一份邮件给李四lisi@mydomain.com，则服务器接收邮件的过程大致如下图所示：
 
-![服务器接收邮件的过程](../../../attachments/cs/manual/deploy-mail-server/server-receive-mail.png)
+![服务器接收邮件的过程](deploy-mail-server/server-receive-mail.png)
 
 1. zhangsan@oschina.net发送邮件到lisi@mydomain.com
 2. `oschina.net`服务器会通过DNS查询`mydomain.com`的MX记录并找到Postfix所在的服务器
@@ -42,7 +42,7 @@ tags: mail postfix dovecot
 
 上述例子中我们看到了服务器接收邮件的过程，接下来我们看看，当大家通过用户名密码登录邮箱查看邮件时，会发生什么事情：
 
-![用户查收邮件的过程](../../../attachments/cs/manual/deploy-mail-server/user-read-mail.png)
+![用户查收邮件的过程](deploy-mail-server/user-read-mail.png)
 
 1. 邮件客户端 to Dovecot：尊敬的Dovecot大人，您好！我阔以建立一个IMAP加密连接吗？
 2. Dovecot to 邮件客户端：当然阔以。这是我的SSL证书，请您告诉我帐号和密码！
@@ -57,7 +57,7 @@ tags: mail postfix dovecot
 
 查收了最新的邮件之后，李四lisi@mydomain.com发现张三给他发来了邮件。现在，李四回复一封邮件给张三，会发生什么事情：
 
-![用户发送邮件的过程](../../../attachments/cs/manual/deploy-mail-server/user-send-mail.png)
+![用户发送邮件的过程](deploy-mail-server/user-send-mail.png)
 
 1. 邮件客户端 to Postfix：尊敬的Postfix大人，您好！我阔以建立一个安全的SMTP连接嘛？
 2. Postfix to 邮件客户端：说人话！可以就是可以，干嘛要说「阔以」啊！你丫贱啊，找抽啊！想建立SMTP连接可以，不过要加密。这是我的SSL证书，告诉我你的帐号和密码，你个贱人！
@@ -145,7 +145,7 @@ apt-get install mysql-server
 
 安装过程中会需要你输入两次MySQL的root口令，请牢记该口令
 
-![设置MySQL密码](../../../attachments/cs/manual/deploy-mail-server/set-mysql-password.png)
+![设置MySQL密码](deploy-mail-server/set-mysql-password.png)
 
 ### 新建数据库及用户
 
@@ -298,7 +298,7 @@ apt-get install postfix postfix-mysql
 
 安装过程中需要选择Postfix的类型，请选择Internet Site：
 
-![选择Internet Site](../../../attachments/cs/manual/deploy-mail-server/select-internet-site.png)
+![选择Internet Site](deploy-mail-server/select-internet-site.png)
 
 Postfix安装过程中还会需要输入**System mail name**，这里请输入你要收发邮件的域名地址「随便写也可以，反正后面需要修改配置文件」
 
