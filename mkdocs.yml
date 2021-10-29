@@ -64,3 +64,5 @@ plugins:
         - '.*\.(tmp|bin|tar)$'
   - search
   - roamlinks
+  - literate-nav:
+      nav_file: summary.md
