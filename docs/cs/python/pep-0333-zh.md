@@ -4,7 +4,8 @@ tags: Python WSGI
 
 # PEP 333 - Python Web Server Gateway Interface v1.0 中文版
 
-> 翻译自 `Python Web Server Gateway Interface v1.0` [PEP 333 - Python Web Server Gateway Interface v1.0](https://www.python.org/dev/peps/pep-0333/)
+> 翻译自 [PEP 333 - Python Web Server Gateway Interface v1.0](https://www.python.org/dev/peps/pep-0333/)  
+> 原始文本参考 [mainframer/PEP333-zh-CN](https://github.com/mainframer/PEP333-zh-CN)，并做校正。
 
 ## 目录
 
@@ -198,7 +199,7 @@ def run_with_cgi(application):
 - 在相应地重写`environ`变量之后，根据目标URL地址将请求路由到不同的应用程序对象。
 - 允许多个应用程序或框架在同一个进程中并行运行。
 - 通过在网络上转发请求和应答，实现负载均衡和远程处理。
-- 对上下文（content）进行后加工（postprocessing），比如应用xsl样式表等。
+- 对内容（content）进行后加工（postprocessing），比如应用xsl样式表等。
 
 中间件的存在对于“服务器/网关”和“应用程序/框架”来说是透明的，并不需要特殊的支持。希望在应用程序中加入中间件的用户只须简单地把中间件当作应用程序提供给服务器，并配置中间件组件以服务器的身份来调用应用程序。当然，中间件组件包裹的“应用程序”也可能是另外一个包裹了应用程序的中间件组件，这样循环下去就构成了我们所说的“中间件栈”了。
 
@@ -598,7 +599,7 @@ def new_app(environ, start_response):
 
 ### URL的重建 (URL Reconstruction)
 
-如果应用程序希望重建一个请求的完整URL，可以使用下面的算法，该算法由lan Bicking **[译者注：此大神乃pip，virtualenv的作者]** 提供：
+如果应用程序希望重建一个请求的完整URL，可以使用下面的算法，该算法由lan Bicking **[译者注：pip、virtualenv 的作者]** 提供：
 
 ```python
 from urllib import quote
@@ -639,7 +640,7 @@ if environ.get('QUERY_STRING'):
 
 最后，如果中间件也希望对Python2.2之前的版本提供支持，迭代应用程序返回的所有值或者由它自己返回一个可迭代者（又或者是两者都有），那么这些中间件必须遵循以上提到的这些建议。
 
-（另外，为了支持Python2.2之前的版本，毫无疑问，任何服务器，网关，应用程序，或者中间件必须只能使用该版本有的语言特性，比如用1和0，而不是True和False，诸如此类。)
+（另外，为了支持Python2.2之前的版本，毫无疑问，任何服务的、网关、应用程序或者中间件必须只能使用该版本有的语言特性，比如用1和0，而不是True和False，诸如此类。)
 
 ### 可选的平台相关文件处理 (Optional Platform-Specific File Handling)
 
