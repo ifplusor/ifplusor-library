@@ -219,6 +219,7 @@ CREATE TABLE `virtual_users` (
   `domain_id` int(11) NOT NULL,
   `password` varchar(106) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `enable` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE
@@ -264,8 +265,8 @@ insert into virtual_users(id,domain_id,password,email) values (2,2,ENCRYPT('1234
 - 给`virtual_aliases`表添加别名数据：
 
 ```sql
-insert into virtual_aliases(id,domain_id,source,destination)  values (1,2,'all@mydomain.com','zhangsan@mydomain.com');
-insert into virtual_aliases(id,domain_id,source,destination)  values (1,2,'all@mydomain.com','lisi@mydomain.com');
+insert into virtual_aliases(id,domain_id,source,destination) values (1,2,'all@mydomain.com','zhangsan@mydomain.com');
+insert into virtual_aliases(id,domain_id,source,destination) values (1,2,'all@mydomain.com','lisi@mydomain.com');
 ```
 
 !!! note "请注意"
@@ -276,7 +277,9 @@ insert into virtual_aliases(id,domain_id,source,destination)  values (1,2,'all@m
 写几个SQL查询语句查看下结果吧
 
 ```sql
-select * from virtual_domains;  select * from virtual_users;  select * from virtual_aliases;
+select * from virtual_domains;
+select * from virtual_users;
+select * from virtual_aliases;
 ```
 
 ## Postfix安装及配置
@@ -460,7 +463,7 @@ user = mailserver
 password = mailserver123
 hosts = 127.0.0.1
 dbname = mailserver
-query = SELECT 1 FROM virtual_users WHERE email='%s'
+query = SELECT 1 FROM virtual_users WHERE enable=1 AND email='%s'
 ```
 
 - 重启Postfix服务
@@ -673,7 +676,7 @@ default_pass_scheme = SHA512-CRYPT
 取消文件中`password_query`行的注释，并将起修改为如下：
 
 ```conf
-password_query = SELECT email as user, password FROM virtual_users WHERE email='%u';
+password_query = SELECT email as user, password FROM virtual_users WHERE enable=1 AND email='%u';
 ```
 
 保存退出
