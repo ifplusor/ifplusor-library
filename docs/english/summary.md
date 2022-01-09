@@ -1,2 +1,3 @@
+- [Pronunciation](pronunciation/)
 - [EF](ef/)
 - */
