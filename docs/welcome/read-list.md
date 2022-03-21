@@ -477,3 +477,9 @@
       恩格斯
   - 读完日期：
       2022-02-10
+- In Search of an Understandable Consensus Algorithm (Extended Version)
+  - 作者：
+      Diego Ongaro,
+      John Ousterhout
+  - 读完日期：
+      2022-03-21
