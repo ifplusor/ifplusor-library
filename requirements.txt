@@ -1,6 +1,6 @@
 mkdocs
 mkdocs-material
-mkdocs-roamlinks-plugin
+# mkdocs-ezlinks-plugin
 mkdocs-exclude
 mkdocs-literate-nav
 mdx_truly_sane_lists

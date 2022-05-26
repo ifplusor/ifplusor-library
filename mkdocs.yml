@@ -64,6 +64,8 @@ plugins:
       regex:
         - '.*\.(tmp|bin|tar)$'
   - search
-  - roamlinks
+  - ezlinks:
+      wikilinks: true
+      reference_links: true
   - literate-nav:
       nav_file: summary.md
