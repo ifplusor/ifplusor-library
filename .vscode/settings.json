@@ -4,7 +4,11 @@
   "editor.overviewRulerBorder": false,
   "editor.lineHeight": 24,
   "[markdown]": {
-    "editor.quickSuggestions": true
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
   },
   "files.defaultLanguage": "markdown",
   "files.exclude": {
@@ -21,14 +25,12 @@
   "pasteImage.path": "${projectRoot}/attachments",
   "pasteImage.showFilePathConfirmInputBox": true,
   "prettier.singleQuote": false,
-  "spellright.notificationClass": "warning",
-  "vscodeMarkdownNotes.noteCompletionConvention": "noExtension",
-  "vscodeMarkdownNotes.slugifyMethod": "github-slugger",
   "conventionalCommits.scopes": [
     "c++",
     "python",
     "spring",
     "rocketmq",
-    "ef"
-  ],
+    "ef",
+    "pronunciation"
+  ]
 }
