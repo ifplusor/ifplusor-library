@@ -328,20 +328,20 @@ vi /etc/postfix/main.cf
 
 ```conf
 # TLS parameters
-# smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-# smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-# smtpd_use_tls=yes
-# smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
-# smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+#smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+#smtpd_use_tls=yes
+#smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+#smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 ```
 
 - 复制如下内容，并将其插入到上述注释代码之后：
 
 ```conf
-smtpd_tls_cert_file=/etc/dovecot/dovecot.pem
-smtpd_tls_key_file=/etc/dovecot/private/dovecot.pem
-smtpd_use_tls=yes
-smtpd_tls_auth_only = yes
+smtpd_tls_cert_file=/etc/dovecot/private/dovecot.pem
+smtpd_tls_key_file=/etc/dovecot/private/dovecot.key
+smtpd_tls_security_level = encrypt
+
 # Enabling SMTP for authenticated users, and handing off authentication to Dovecot
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
@@ -381,34 +381,42 @@ virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf
 
 ```conf
 # See /usr/share/postfix/main.cf.dist for a commented, more complete version
+
 # Debian specific:  Specifying a file name will cause the first
 # line of that file to be used as the name.  The Debian default
 # is /etc/mailname.
 # myorigin = /etc/mailname
+
 smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
 biff = no
+
 # appending .domain is the MUA's job.
 append_dot_mydomain = no
+
 # Uncomment the next line to generate "delayed mail" warnings  
 # delay_warning_time = 4h
+
 readme_directory = no
+
 # TLS parameters
-# smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-# smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-# smtpd_use_tls=yes
-# smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
-# smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-smtpd_tls_cert_file=/etc/dovecot/dovecot.pem
-smtpd_tls_key_file=/etc/dovecot/private/dovecot.pem
-smtpd_use_tls=yes
-smtpd_tls_auth_only = yes
+#smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+#smtpd_use_tls=yes
+#smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+#smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+smtpd_tls_cert_file=/etc/dovecot/private/dovecot.pem
+smtpd_tls_key_file=/etc/dovecot/private/dovecot.key
+smtpd_tls_security_level = encrypt
+
 # Enabling SMTP for authenticated users, and handing off authentication to Dovecot
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
 smtpd_sasl_auth_enable = yes
 smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination
+
 # See /usr/share/doc/postfix/TLS\_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
+
 myhostname = host.mydomain.com
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
@@ -420,8 +428,10 @@ mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = all
+
 # Handing off local delivery to Dovecot's LMTP, and telling it where to store mail
 virtual_transport = lmtp:unix:private/dovecot-lmtp
+
 # Virtual domains, users, and aliases
 virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf
 virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
@@ -546,7 +556,7 @@ apt-get install dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-m
 
 #### 修改`/etc/dovecot/dovecot.conf`文件
 
-使用vi编辑器打开`/etc/dovecot/dovecot.conf`文件并在文件种加入如下内容：
+使用vi编辑器打开`/etc/dovecot/dovecot.conf`文件并在文件中加入如下内容：
 
 ```conf
 !include conf.d/*.conf
@@ -596,7 +606,7 @@ mkdir -p /var/mail/vhosts/mydomain.com
 输入如下命令以新建`vmail`用户组及用户并赋权限
 
 ```bash
-groupadd -g 5000 vmail  useradd -g vmail -u 5000 vmail -d /var/mail
+groupadd -g 5000 vmail useradd -g vmail -u 5000 vmail -d /var/mail
 ```
 
 接下来修改一下`/var/mail/`目录的权限，使`vmail`能够访问：
@@ -712,6 +722,10 @@ service pop3-login {
 
 ```conf
 service lmtp {
+    #unix_listener lmtp {
+        #mode = 0600
+    #}
+
     unix_listener /var/spool/postfix/private/dovecot-lmtp {
         mode = 0600
         user = postfix
@@ -736,12 +750,6 @@ service auth {
     # permissions make it readable only by root, but you may need to relax these
     # permissions. Users that have access to this socket are able to get a list
     # of all usernames and get results of everyone's userdb lookups.
-    unix_listener /var/spool/postfix/private/auth {
-        mode = 0666
-        user = postfix
-        group = postfix
-    }
-
     unix_listener auth-userdb {
         mode = 0600
         user = vmail
@@ -749,9 +757,11 @@ service auth {
     }
 
     # Postfix smtp-auth
-    # unix_listener /var/spool/postfix/private/auth {
-    #     mode = 0666
-    # }
+    unix_listener /var/spool/postfix/private/auth {
+        mode = 0666
+        user = postfix
+        group = postfix
+    }
 
     # Auth process is run as this user.
     user = dovecot
@@ -765,7 +775,6 @@ service auth-worker {
     # Auth worker process is run as root by default, so that it can access
     # /etc/shadow. If this isn't necessary, the user should be changed to
     # $default_internal_user.
-
     user = vmail
 }
 ```
