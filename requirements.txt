@@ -1,6 +1,6 @@
 mkdocs
 mkdocs-material
-# mkdocs-ezlinks-plugin
+git+https://github.com/ifplusor/mkdocs-ezlinks-plugin.git#egg=mkdocs-ezlinks-plugin
 mkdocs-exclude
 mkdocs-literate-nav
 mdx_truly_sane_lists

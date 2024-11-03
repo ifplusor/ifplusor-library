@@ -44,9 +44,9 @@ markdown_extensions:
   - pymdownx.tilde
   - pymdownx.smartsymbols
   # list
-  - mdx_truly_sane_lists
   - def_list
   - pymdownx.tasklist
+  - mdx_truly_sane_lists
   # math
   - pymdownx.arithmatex
   # meta tags

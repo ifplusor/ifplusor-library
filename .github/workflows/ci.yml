@@ -12,10 +12,4 @@ jobs:
           python-version: 3.x
       - uses: actions/checkout@v3
       - run: pip install -r requirements.txt
-      - uses: actions/checkout@v3
-        with:
-          repository: ifplusor/mkdocs-ezlinks-plugin
-          ref: wiki-link-reference
-          path: mkdocs-ezlinks-plugin
-      - run: pip install ./mkdocs-ezlinks-plugin && rm -rf ./mkdocs-ezlinks-plugin
       - run: mkdocs gh-deploy --force

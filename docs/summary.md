@@ -1,5 +1,6 @@
 - [Welcome](welcome/)
 - [RocketMQ](rocketmq/)
 - [CS](cs/)
+- [Home Labs](homelabs/)
 - [English](english/)
 - */
