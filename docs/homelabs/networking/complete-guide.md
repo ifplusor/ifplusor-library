@@ -131,7 +131,7 @@ iptv接口在高级设置中勾选“使用默认网关”（Use default gateway
 
 ## HomeKit
 
-HomeKit设备通过Bonjour（zeroconf）技术实现服务发现自组网。如果同一设备在短时间内以不同的IP接入（如接入的子网发生变化），该设备会被重命名，在原有的名称后追加“ (2)”后缀。
+HomeKit设备通过Bonjour（zeroconf）技术实现服务发现自组网。如果同一设备在短时间内以不同的IP接入（如接入的子网发生变化），该设备会被重命名，在原有的名称后追加“(2)”后缀。
 
 OpenWrt的文档中推荐使用[umdns](https://github.com/openwrt/mdnsd)，试了一下，最后发现[不支持作为Repeater](https://openwrt.org/docs/guide-developer/mdns#config_file)。最后换成了avahi。
 
@@ -152,3 +152,10 @@ HA支持Yeelight集成，其设备自动发现使用魔改的SSDP协议，在我
 
 - [Config docker-daemon.json](https://github.com/home-assistant/operating-system/discussions/2797)
 - [Yeelight WiFi Light Inter-Operation Specification](https://www.yeelight.com/download/Yeelight_Inter-Operation_Spec.pdf)
+
+## 其它参考
+
+- [在 AX88U + Merlin 384.19 上配置基于 RTL8156B 的 2.5GbE 网卡](https://wu.renjie.im/blog/network/ax88u-nbase-t/zh-cn/)
+- [Towards 2.5GbE (NBASE-T) on ASUS RT-AX88U with RTL8156B and Asuswrt-Merlin 384.19](https://wu.renjie.im/blog/network/ax88u-nbase-t/)
+- [Need help to compile Realtek r8152 driver for RT-AX88U](https://www.snbforums.com/threads/need-help-to-compile-realtek-r8152-driver-for-rt-ax88u.89035/)
+- [Compiling Realtek RTL 8152, 8156 and 8157 drivers for QNAP NAS](https://gist.github.com/RikshaDriver/0388ba3f38f89eb975ebb0b915860ec2)
