@@ -1,0 +1,2552 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://library.ifplusor.win/cs/c%2B%2B/cpp-go-to-modernization/">
+      
+      
+        <link rel="prev" href="../../../rocketmq/rocketmq-example/">
+      
+      
+        <link rel="next" href="../practice-of-polymorphism-in-cpp/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>C++：走向现代化 - ifplusor's library</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a40c8224.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c走向现代化" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="ifplusor&#39;s library" class="md-header__button md-logo" aria-label="ifplusor's library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ifplusor's library
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C++：走向现代化
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ifplusor/ifplusor-library" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ifplusor-library
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../welcome/" class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../rocketmq/rocketmq-example/" class="md-tabs__link">
+          
+  
+  RocketMQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  CS
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../homelabs/networking/complete-guide/" class="md-tabs__link">
+          
+  
+  Home Labs
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../english/pronunciation/100%20most%20common%20words%20in%20American%20English/" class="md-tabs__link">
+          
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ifplusor&#39;s library" class="md-nav__button md-logo" aria-label="ifplusor's library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ifplusor's library
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ifplusor/ifplusor-library" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ifplusor-library
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../welcome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hello
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../welcome/read-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    书单
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RocketMQ
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            RocketMQ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rocketmq/rocketmq-example/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RocketMQ Example
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    CS
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            CS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            C++
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    C++：走向现代化
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    C++：走向现代化
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-当我们说-c-的时候我们在说什么" class="md-nav__link">
+    <span class="md-ellipsis">
+      0. 当我们说 C++ 的时候，我们在说什么
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-c-简史" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. C++ 简史
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-传统-c-的设计规则" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 传统 C++ 的设计规则
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 传统 C++ 的设计规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-设计目标aims" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. 设计目标（Aims）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-一般性规则general-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. 一般性规则（General Rules）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-支持设计的规则design-support-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. 支持设计的规则（Design Support Rules）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-语言的技术性规则language-technical-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4. 语言的技术性规则（Language-Technical Rules）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-c-in-2006" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. C++ in 2006
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. C++ in 2006">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-环境的改变" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. 环境的改变
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-c-vs-java--c" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. C++ vs Java &amp; C#
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-java--c-的观点" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Java &amp; C# 的观点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-c-的劣势" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4. C++ 的劣势
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-c11-it-feels-like-a-new-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. C++11: It Feels Like a New Language
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. C++11: It Feels Like a New Language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-语言特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. 语言特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-标准库" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2. 标准库
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-c14-completing-c11" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. C++14: Completing C++11
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. C++14: Completing C++11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-语言特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. 语言特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-c17-lost-at-sea" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. C++17: Lost at Sea
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. C++17: Lost at Sea">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-语言特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1. 语言特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-标准库" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2. 标准库
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-c20-a-struggle-for-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. C++20: A Struggle for Direction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. C++20: A Struggle for Direction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-主要特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. 主要特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-次要特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2. 次要特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-c23" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. C++23
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. C++23">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-开发中的特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1. 开发中的特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考资料" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practice-of-polymorphism-in-cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    多态实践：继承、覆盖与虚函数
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/pep-0333-zh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PEP 333 - Python Web Server Gateway Interface v1.0 中文版
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/spring-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security 笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Manual
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Manual
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manual/create-self-signed-certificate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create self-signed certificate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manual/deploy-mail-server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    使用Postfix+Dovecot+MySQL搭建邮件服务器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Home Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Networking
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Networking
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../homelabs/networking/complete-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Complete Guide to HomeLab Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    English
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            English
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Pronunciation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pronunciation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/pronunciation/100%20most%20common%20words%20in%20American%20English/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    100 most common words in American English
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    EF
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            EF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1" id="__nav_5_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            L1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1_1" id="__nav_5_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U1.问候及介绍
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            U1.问候及介绍
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S1.%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S1. 自我介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S2.%E6%8A%8A%E6%82%A8%E7%9A%84%E5%90%8D%E5%AD%97%E5%91%8A%E8%AF%89%E7%BB%99%E6%9F%90%E4%BA%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S2. 把您的名字告诉给某人
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S3.%E4%BA%A4%E6%8D%A2%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S3. 交换电话号码
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S4.%E9%97%AE%E5%80%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S4. 问候
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1_2" id="__nav_5_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U2.办公室和学校
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            U2.办公室和学校
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U2.%E5%8A%9E%E5%85%AC%E5%AE%A4%E5%92%8C%E5%AD%A6%E6%A0%A1/S1.%E8%B0%88%E8%AE%BA%E6%82%A8%E7%9A%84%E8%AF%BE%E5%A0%82/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U2.S1. 谈论您的课堂
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    L4
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            L4
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2_1" id="__nav_5_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U1.娱乐
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            U1.娱乐
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L4/U1.%E5%A8%B1%E4%B9%90/S1.%E6%8F%8F%E8%BF%B0%E4%BC%91%E9%97%B2%E5%A8%B1%E4%B9%90%E7%9A%84%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L4.U1.S1. 描述休闲娱乐的选择
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L4/U1.%E5%A8%B1%E4%B9%90/S2.%E8%B0%88%E8%AE%BA%E5%8D%B3%E5%B0%86%E5%8F%91%E7%94%9F%E7%9A%84%E6%B4%BB%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L4.U1.S2. 谈论即将发生的活动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-当我们说-c-的时候我们在说什么" class="md-nav__link">
+    <span class="md-ellipsis">
+      0. 当我们说 C++ 的时候，我们在说什么
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-c-简史" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. C++ 简史
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-传统-c-的设计规则" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 传统 C++ 的设计规则
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 传统 C++ 的设计规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-设计目标aims" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. 设计目标（Aims）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-一般性规则general-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. 一般性规则（General Rules）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-支持设计的规则design-support-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. 支持设计的规则（Design Support Rules）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-语言的技术性规则language-technical-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4. 语言的技术性规则（Language-Technical Rules）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-c-in-2006" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. C++ in 2006
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. C++ in 2006">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-环境的改变" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. 环境的改变
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-c-vs-java--c" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. C++ vs Java &amp; C#
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-java--c-的观点" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Java &amp; C# 的观点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-c-的劣势" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4. C++ 的劣势
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-c11-it-feels-like-a-new-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. C++11: It Feels Like a New Language
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. C++11: It Feels Like a New Language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-语言特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. 语言特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-标准库" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2. 标准库
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-c14-completing-c11" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. C++14: Completing C++11
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. C++14: Completing C++11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-语言特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. 语言特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-c17-lost-at-sea" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. C++17: Lost at Sea
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. C++17: Lost at Sea">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-语言特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1. 语言特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-标准库" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2. 标准库
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-c20-a-struggle-for-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. C++20: A Struggle for Direction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. C++20: A Struggle for Direction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-主要特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. 主要特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-次要特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2. 次要特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-c23" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. C++23
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. C++23">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-开发中的特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1. 开发中的特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考资料" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="c走向现代化">C++：走向现代化<a class="headerlink" href="#c走向现代化" title="Permanent link">#</a></h1>
+<blockquote>
+<p>本文主要内容整理自本贾尼·斯特劳斯特卢普（Bjarne Stroustrup）发表的著作和论文，相关内容参见文末参考资料。</p>
+</blockquote>
+<h2 id="0-当我们说-c-的时候我们在说什么">0. 当我们说 C++ 的时候，我们在说什么<a class="headerlink" href="#0-当我们说-c-的时候我们在说什么" title="Permanent link">#</a></h2>
+<p>对用户而言，“C++”不只是由标准定义的程序设计言，而是由很多部分组成的集合，不限于：</p>
+<ul>
+<li>由标准定义的语言规范</li>
+<li>标准库</li>
+<li>其它的库</li>
+<li>大量的（遗留）代码库</li>
+<li>（包括其他语言开发的）工具</li>
+<li>教学和培训资源</li>
+<li>社区支持</li>
+</ul>
+<h2 id="1-c-简史">1. C++ 简史<a class="headerlink" href="#1-c-简史" title="Permanent link">#</a></h2>
+<p><img alt="C++ milestones" src="https://isocpp.org/files/img/wg21-timeline-2019-07.png" /></p>
+<blockquote>
+<p>C with Classes -&gt; C84 -&gt; Release 1.0(Cfront) -&gt; Release 1.2(Cfront) -&gt; Release 2.0(Cfront) -&gt; ARM -&gt; C++98(std) -&gt; C++03(std) -&gt; C++11(std) -&gt; C++14(std) -&gt; C++17(std) -&gt; C++20(std)</p>
+</blockquote>
+<ul>
+<li>1979: Start of work on “C with Classes” that became C++; first non-research user;<ul>
+<li>Language: <code>class</code>es, constructors/destructors, <code>public</code>/<code>private</code>, simple inheritance, function argument type checking</li>
+<li>Library: <code>task</code>s (coroutines and simulation support), <code>vector</code> parameterized with macros</li>
+</ul>
+</li>
+<li>1985: First commercial release of C++; TC++PL1<ul>
+<li>Language: <code>virtual</code> functions, operator overloading, references, const</li>
+<li>Library: <code>complex</code> arithmetic, stream I/O</li>
+</ul>
+</li>
+<li>1989-91: ANSI and ISO standardization start; TC++PL2<ul>
+<li>Language: abstract classes, multiple inheritance, exceptions, templates</li>
+<li>Library: iostreams (but no <code>task</code>s)</li>
+</ul>
+</li>
+<li>1998: C++98, the first ISO C++ standard, TC++PL3<ul>
+<li>Language: <code>namespace</code>s, named casts, <code>bool</code>, <code>dynamic_cast</code></li>
+<li>Library: the STL (containers and algorithms), <code>string</code>, <code>bitset</code></li>
+</ul>
+</li>
+<li>2011: C++11, TC++PL4<ul>
+<li>Language: memory model, <code>auto</code>, range-<code>for</code>, <code>constexpr</code>, lambdas, user-defined literals, ...</li>
+<li>Library: <code>thread</code>s and locks, <code>future</code>, <code>unique_ptr</code>, <code>shared_ptr</code>, <code>array</code>, time and clocks, random numbers, unordered containers (hash tables), ...</li>
+</ul>
+</li>
+<li>2014: C++14<ul>
+<li>Language: generic lambdas, local variables in <code>constexpr</code> functions, digit separators, ...</li>
+<li>Library: user-defined literals, ...</li>
+</ul>
+</li>
+<li>2017: C++17<ul>
+<li>Language: structured bindings, variable templates, template argument deduction from constructors, ...</li>
+<li>Library: file system, <code>scoped_lock</code>, <code>shared_mutex</code> (reader-writer locks), <code>any</code>, <code>variant</code>, <code>optional</code>, <code>string_view</code>, parallel algorithms, ...</li>
+</ul>
+</li>
+<li>2020: C++20<ul>
+<li>Language: <code>concept</code>s, <code>module</code>s, coroutines, three-way comparisons, improved support for compile-time computation, ...</li>
+<li>Library: concepts, ranges, dates and time zones, <code>span</code>, formats, improved concurrency and parallelism support, ...</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-传统-c-的设计规则">2. 传统 C++ 的设计规则<a class="headerlink" href="#2-传统-c-的设计规则" title="Permanent link">#</a></h2>
+<p><img alt="The Evolution of C++" src="../the-evolution-of-cpp.png" /></p>
+<h3 id="21-设计目标aims">2.1. 设计目标（Aims）<a class="headerlink" href="#21-设计目标aims" title="Permanent link">#</a></h3>
+<p>C++ 使认真的人更享受编程的乐趣</p>
+<blockquote>
+<p>C++ makes programming more enjoyable for serious programmers</p>
+</blockquote>
+<p>C++ 是一个通用程序设计语言，它更倾向于系统编程，并且</p>
+<blockquote>
+<p>C++ is a general-purpose programming language with a bias towards systems programming that</p>
+</blockquote>
+<ul>
+<li>是更好的 C（is a better C）</li>
+<li>支持数据抽象（supports data abstraction）</li>
+<li>支持面向对象编程（supports object-oriented programming）</li>
+<li>支持泛型编程（supports generic programming）</li>
+</ul>
+<h3 id="22-一般性规则general-rules">2.2. 一般性规则（General Rules）<a class="headerlink" href="#22-一般性规则general-rules" title="Permanent link">#</a></h3>
+<ul>
+<li>C++ 的发展必须由实际问题推动</li>
+<li>不应被牵涉到无益的对完美的追求中</li>
+<li>C++ 必须是现在就有用的</li>
+<li>每个特征必须存在一种合理的明显实现方式</li>
+<li>总是提供一个变通的方法</li>
+<li><strong>C++ 是一种语言，而不是一个完整的系统</strong><blockquote>
+<p>一个程序设计环境包含了许多部分，一种方式是将多个部分组合成一个“集成化的”系统，另一种方式是维持系统中各部分之间的经典划分，例如编译器、连接器、语言的运行支持库、I/O库、编辑器、文件系统、数据库，等等。C++遵循的是后一条路。  </p>
+</blockquote>
+</li>
+<li>为每种应该支持的风格提供全面支持</li>
+<li>不试图去强迫人做什么<blockquote>
+<p>程序员都是聪明人:)，总能找到方法绕过觉得无法接受的规则和限制。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="23-支持设计的规则design-support-rules">2.3. 支持设计的规则（Design Support Rules）<a class="headerlink" href="#23-支持设计的规则design-support-rules" title="Permanent link">#</a></h3>
+<ul>
+<li>支持健全的设计概念</li>
+<li>为程序的组织提供各种机制</li>
+<li>直接说出你的意思<blockquote>
+<p>允许用语言本身表达所有重要的东西，而不是在注释或者通过宏这类黑客的手段。</p>
+</blockquote>
+</li>
+<li>所有的特征都必须是能负担的</li>
+<li>允许一个有用的特征比防止各种错误使用更重要</li>
+<li>支持从分别开发的部分出发进行软件组合</li>
+</ul>
+<h3 id="24-语言的技术性规则language-technical-rules">2.4. 语言的技术性规则（Language-Technical Rules）<a class="headerlink" href="#24-语言的技术性规则language-technical-rules" title="Permanent link">#</a></h3>
+<ul>
+<li>不隐式地违反静态类型系统</li>
+<li>为用户定义类型提供与内部类型同样好的支持</li>
+<li>局部化是好事情</li>
+<li>避免顺序依赖性</li>
+<li>如果有疑问，就选择该特征的最容易说清楚的形式</li>
+<li>语法是重要的（常以某些我们不希望的方式起作用）</li>
+<li>清除使用预处理程序的必要性<blockquote>
+<p>支持Low-Level编程的规则（Low-Level Programming Support Rules）</p>
+</blockquote>
+</li>
+<li>使用传统的（dumb）连接器<blockquote>
+<p>好的连接兼容性：容易移植，容易与用其它语言编写的软件互操作。</p>
+</blockquote>
+</li>
+<li>没有无故的与C的不兼容性</li>
+<li>不为比C++低级的语言保留生存空间（除了汇编）<blockquote>
+<p>同时提供低级特征和抽象机制</p>
+</blockquote>
+</li>
+<li>不为不使用的特性付出代价（zero-overhead rule）</li>
+<li>为存疑的东西提供人工介入的手段<blockquote>
+<p>比如模版的特化</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="3-c-in-2006">3. C++ in 2006<a class="headerlink" href="#3-c-in-2006" title="Permanent link">#</a></h2>
+<h3 id="31-环境的改变">3.1. 环境的改变<a class="headerlink" href="#31-环境的改变" title="Permanent link">#</a></h3>
+<ul>
+<li>单处理器（单核）性能增长放缓，能效成为关键指标</li>
+<li>硬件供应商绑定开发语言，平台分立（Smart phone）</li>
+<li>新老项目都在向更时髦的平台转移</li>
+<li>学校教学和考试更青睐Java，C++课程教学质量下降</li>
+</ul>
+<h3 id="32-c-vs-java--c">3.2. C++ vs Java &amp; C#<a class="headerlink" href="#32-c-vs-java--c" title="Permanent link">#</a></h3>
+<p>C ++ 基于“程序设计语言与底层操作系统分离”的传统模型，由众多独立工具供应商提供支持。而托管语言往往是专有的，由强大的组织支持。该组织开发庞大的基础架构和库，以供开发者使用。</p>
+<blockquote>
+<p>C++ is based on the traditional model of a programming language separate from the underlying operating system and supported by a multitude of independent tool suppliers. The managed languages tended to be proprietary; only a large and rich organization could develop the massive infrastructure and libraries required.</p>
+</blockquote>
+<h3 id="33-java--c-的观点">3.3. Java &amp; C# 的观点<a class="headerlink" href="#33-java--c-的观点" title="Permanent link">#</a></h3>
+<ul>
+<li>低级（low level）的需求应该由少量的 C 或汇编完成；</li>
+<li>高级（high level）的需求应该由具有广泛运行时支持的、安全的、带垃圾回收的语言完成，这样更好、更低价、更高效；</li>
+<li>Java 和 C# 这样的托管语言，提供垃圾回收和运行时检查，使专家程序员更高产，也使入门更简单；</li>
+<li>程序设计语言要和平台深度集成，集成工具集对于构建大型系统和提高生产效率是必不可少的。</li>
+</ul>
+<h3 id="34-c-的劣势">3.4. C++ 的劣势<a class="headerlink" href="#34-c-的劣势" title="Permanent link">#</a></h3>
+<ul>
+<li>工具链上手门槛高</li>
+<li>接口灵活性和 ABI 稳定性不可兼得</li>
+<li>C++ 标准委员会具有大组织的通病</li>
+</ul>
+<h2 id="4-c11-it-feels-like-a-new-language">4. C++11: It Feels Like a New Language<a class="headerlink" href="#4-c11-it-feels-like-a-new-language" title="Permanent link">#</a></h2>
+<p>支持并发，简化编码（开发），增强泛型编程，静态安全类型扩充，对创建工具库的支持，标准库扩充</p>
+<h3 id="41-语言特性">4.1. 语言特性<a class="headerlink" href="#41-语言特性" title="Permanent link">#</a></h3>
+<ul>
+<li>内存模型：基于现代硬件环境，针对并发的高效 low-level 模型<blockquote>
+<p>memory model - an efficient low level-model of modern hardware as a foundation for concurrency</p>
+</blockquote>
+</li>
+<li><code>auto</code>和<code>decltype</code>：简化类型声明</li>
+<li>range-<code>for</code>：简化范围迭代</li>
+<li>移动（move）语义和右值引用：减少数据拷贝次数</li>
+<li>统一的初始化：一致的对象和内置类型的语法（语义）</li>
+<li><code>nullptr</code>：空指针语义（类型和值两方面）</li>
+<li><code>constexpr</code>函数：编译期求值函数</li>
+<li>用户定义字面量：用户定义类型的字面量</li>
+<li>原始字符串字面量：不转义字符</li>
+<li>属性（attributes）：本质上是关联任意信息和名字</li>
+<li>lambdas：匿名函数对象</li>
+<li>可变参数模板（variadic <code>template</code>s）：可以处理不定数量任意类型参数的模板</li>
+<li>模板别名：重命名，并绑定模板参数</li>
+<li><code>noexcept</code>：担保函数不会抛出异常</li>
+<li><code>override</code>和<code>final</code>：用于类继承的语法扩充</li>
+<li><code>static_assert</code>：编译期断言</li>
+<li><code>long long</code>：更宽的整型</li>
+<li>成员默认初始值：不用通过构造函数初始化列表设置成员默认值</li>
+<li><code>enum class</code>es：带作用域的强类型枚举</li>
+</ul>
+<h3 id="42-标准库">4.2. 标准库<a class="headerlink" href="#42-标准库" title="Permanent link">#</a></h3>
+<ul>
+<li><code>unique_ptr</code>和<code>shared_ptr</code>：实践 RAII 的资源管理指针</li>
+<li>内存模型和原子量（atomic）</li>
+<li><code>thread</code>，<code>mutex</code>，<code>condition_variable</code>：类型安全且可移植的系统级并发支持</li>
+<li><code>function</code>，<code>bind</code>：通用函数封装器</li>
+<li><code>future</code>，<code>promise</code>，<code>packaged_task</code>：轻量的高级并发工具</li>
+<li><code>tuple</code>：匿名的基础复合类型</li>
+<li>类型萃取（type traits）：用于元编程的类型属性识别</li>
+<li>正则表达式</li>
+<li>随机数：支持多种生成器和数据分布</li>
+<li>时间（Time）：<code>time_point</code>和<code>duration</code></li>
+<li><code>unordered_map</code>等：哈希表</li>
+<li><code>forward_list</code>：轻量级链表</li>
+<li><code>array</code>：长度可知的固定长度数组</li>
+<li>花括号（emplace）运算：构造容器时避免对象拷贝</li>
+<li><code>exception_ptr</code>：跨线程传递异常</li>
+</ul>
+<h2 id="5-c14-completing-c11">5. C++14: Completing C++11<a class="headerlink" href="#5-c14-completing-c11" title="Permanent link">#</a></h2>
+<p>ABI稳定，无痛升级</p>
+<h3 id="51-语言特性">5.1. 语言特性<a class="headerlink" href="#51-语言特性" title="Permanent link">#</a></h3>
+<ul>
+<li>二进制字面量：<code>0b1001000011110011</code></li>
+<li>数字分隔符：增强可读性，<code>0b1001’0000’1111’0011</code></li>
+<li>变量模板：参数化常量和变量</li>
+<li>函数返回值类型推导<blockquote>
+<p>对 c++11 中 lambda 返回值类型推导的推广</p>
+</blockquote>
+</li>
+<li>泛型lambda</li>
+<li><code>constexpr</code>函数支持局部变量</li>
+<li>移动（move）捕获：<code>[p = move(ptr)] { /* ... */ };</code></li>
+<li>带类型的tuple访问：<code>x = get&lt;int&gt;(t)</code>;</li>
+<li>标准库支持用户定义字面量：<a href="https://zh.cppreference.com/w/cpp/string/basic_string"><code>basic_string</code></a>、<a href="https://zh.cppreference.com/w/cpp/chrono/duration"><code>duration</code></a>与<a href="https://zh.cppreference.com/w/cpp/numeric/complex"><code>complex</code></a></li>
+</ul>
+<h2 id="6-c17-lost-at-sea">6. C++17: Lost at Sea<a class="headerlink" href="#6-c17-lost-at-sea" title="Permanent link">#</a></h2>
+<p>新特性很多，但没有重大改进</p>
+<h3 id="61-语言特性">6.1. 语言特性<a class="headerlink" href="#61-语言特性" title="Permanent link">#</a></h3>
+<ul>
+<li><a href="https://zh.cppreference.com/w/cpp/language/class_template_argument_deduction">类模板实参推导</a>：简化对象定义</li>
+<li>推导原则（guides）：用于消除构造函数模板参数类型推导歧义的精确符号</li>
+<li><a href="https://zh.cppreference.com/w/cpp/language/structured_binding">结构化绑定</a>： 简化表示，并消除一个可能引起变量未初始化问题的源</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">();</span><span class="w">  </span><span class="c1">// call syntax, introducing aliases</span>
+</code></pre></div>
+<ul>
+<li><a href="https://zh.cppreference.com/w/cpp/language/inline"><code>inline</code>变量</a>：简化仅头文件的库中具有静态存储期的变量的使用</li>
+<li><a href="https://zh.cppreference.com/w/cpp/language/fold">折叠表达式</a>：简化变参模板的使用</li>
+<li>判断（<a href="https://zh.cppreference.com/w/cpp/language/if"><code>if</code></a>、<a href="https://zh.cppreference.com/w/cpp/language/switch"><code>switch</code></a>和<a href="https://zh.cppreference.com/w/cpp/language/while"><code>while</code></a>）语句中的初始化器：类似for语句</li>
+<li>强制的<a href="https://zh.cppreference.com/w/cpp/language/copy_elision">复制消除</a>：消除一些多余的拷贝运算</li>
+<li>更严格的<a href="https://zh.cppreference.com/w/cpp/language/eval_order">求值顺序</a>：防止一些细微的求值顺序错误</li>
+<li><code>auto</code>占位的非类型<a href="https://zh.cppreference.com/w/cpp/language/template_parameters">模板形参</a>：值模板参数类型推导</li>
+<li>捕获通用错误的新<a href="https://zh.cppreference.com/w/cpp/language/attributes">属性</a>：<code>[[maybe_unused]]</code>, <code>[[nodiscard]]</code>, and <code>[[fallthrough]]</code></li>
+<li>十六进制浮点字面量</li>
+<li>编译期的<a href="https://zh.cppreference.com/w/cpp/language/if"><code>constexpr if</code>语句</a>：简化编译期求值代码</li>
+</ul>
+<h3 id="62-标准库">6.2. 标准库<a class="headerlink" href="#62-标准库" title="Permanent link">#</a></h3>
+<ul>
+<li><code>optional</code>，<code>variant</code>，<code>any</code>：表示可选值的标准库类型</li>
+<li><code>shared_mutex</code>，<code>shared_lock</code>（读写锁），<code>scoped_lock</code>（加多个锁，且不会引发死锁）</li>
+<li>并行STL：标准库算法的多线程和/或向量化版本</li>
+<li>文件系统：操纵文件系统的路径和目录的可移植方式</li>
+<li><code>string_view</code>：引用（非所属的）不可变字符序列</li>
+<li><a href="https://zh.cppreference.com/w/cpp/numeric/special_functions">数学特殊函数</a>：Laguerre多项式，Legendre多项式，beta函数，黎曼zeta函数</li>
+</ul>
+<h2 id="7-c20-a-struggle-for-direction">7. C++20: A Struggle for Direction<a class="headerlink" href="#7-c20-a-struggle-for-direction" title="Permanent link">#</a></h2>
+<p>继C++11后的又一重大突破</p>
+<h3 id="71-主要特性">7.1. 主要特性<a class="headerlink" href="#71-主要特性" title="Permanent link">#</a></h3>
+<ul>
+<li>Concepts：specification of requirements for generic code</li>
+<li>Modules：support for modularity for code hygiene and improved compile times</li>
+<li>Coroutines：stackless coroutines</li>
+<li>Compile-time computation support</li>
+<li><code>&lt;=&gt;</code>：a three-way comparison operator</li>
+<li>Ranges：a library flexible range abstractions</li>
+<li>Date：a library providing date types, calendar, and time zones</li>
+<li>Span：a library providing efficient and safe access to arrays</li>
+<li>Format：a library providing type-safe printf-like output</li>
+<li>Concurrency增强：such as scoped threads and stop tokens</li>
+</ul>
+<h3 id="72-次要特性">7.2. 次要特性<a class="headerlink" href="#72-次要特性" title="Permanent link">#</a></h3>
+<ul>
+<li>C99-style designated initializers</li>
+<li>Refinements to lambda capture</li>
+<li>Template parameter lists for generic lambdas</li>
+<li>Initialization of an additional variable within a range-for</li>
+<li>Lambdas in unevaluated contexts</li>
+<li>Pack expansions in lambda capture</li>
+<li>Removing the need for <code>typename</code> in some cases</li>
+<li>More attributes: <code>[[likely]]</code> and <code>[[unlikely]]</code></li>
+<li><code>source_location</code> to give the source code location of a piece of code without the use of macros</li>
+<li>Feature test macros</li>
+<li>Conditional <code>explicit</code></li>
+<li>Signed integers are guaranteed to be two’s complement</li>
+<li>Mathematical constants, such as <code>pi</code> and <code>sqrt2</code></li>
+<li>Operations on bits, such as rotations and counting ones</li>
+</ul>
+<h2 id="8-c23">8. C++23<a class="headerlink" href="#8-c23" title="Permanent link">#</a></h2>
+<h3 id="81-开发中的特性">8.1. 开发中的特性<a class="headerlink" href="#81-开发中的特性" title="Permanent link">#</a></h3>
+<ul>
+<li>Networking and executors</li>
+<li>Contracts：assertions, preconditions, and postconditions</li>
+<li>Static reflection：facilities for generating code based on the surrounding program</li>
+<li>Pattern Matching：selecting code to be executed based on types and object values</li>
+</ul>
+<h2 id="参考资料">参考资料<a class="headerlink" href="#参考资料" title="Permanent link">#</a></h2>
+<ol>
+<li><a href="https://www.stroustrup.com/dne.html">The Design and Evolution of C++</a></li>
+<li><a href="https://www.stroustrup.com/DnE2005.pdf">C++ in 2005</a></li>
+<li><a href="https://www.stroustrup.com/hopl20main-p5-p-bfc9cd4--final.pdf">Thriving in a Crowded and Changing World: C++ 2006–2020</a></li>
+<li><a href="https://isocpp.org/">Standard C++ Foundation 官方网站</a></li>
+<li><a href="http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">C++ Core Guidelines</a>（中文翻译：<a href="https://github.com/lynnboy/CppCoreGuidelines-zh-CN/blob/master/CppCoreGuidelines-zh-CN.md">lynnboy/CppCoreGuidelines-zh-CN</a>）</li>
+<li><a href="https://zh.cppreference.com/w/cpp">C++ 参考手册</a></li>
+<li><a href="https://changkun.de/modern-cpp/">现代 C++ 教程: 高速上手 C++ 11/14/17/20</a></li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.top", "search.highlight"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2048 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://library.ifplusor.win/homelabs/networking/complete-guide/">
+      
+      
+        <link rel="prev" href="../../../cs/manual/deploy-mail-server/">
+      
+      
+        <link rel="next" href="../../../english/pronunciation/100%20most%20common%20words%20in%20American%20English/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>The Complete Guide to HomeLab Networking - ifplusor's library</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a40c8224.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-complete-guide-to-homelab-networking" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="ifplusor&#39;s library" class="md-header__button md-logo" aria-label="ifplusor's library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ifplusor's library
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The Complete Guide to HomeLab Networking
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ifplusor/ifplusor-library" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ifplusor-library
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../welcome/" class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../rocketmq/rocketmq-example/" class="md-tabs__link">
+          
+  
+  RocketMQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../cs/c%2B%2B/cpp-go-to-modernization/" class="md-tabs__link">
+          
+  
+  CS
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  Home Labs
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../english/pronunciation/100%20most%20common%20words%20in%20American%20English/" class="md-tabs__link">
+          
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ifplusor&#39;s library" class="md-nav__button md-logo" aria-label="ifplusor's library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ifplusor's library
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ifplusor/ifplusor-library" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ifplusor-library
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../welcome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hello
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../welcome/read-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    书单
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RocketMQ
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            RocketMQ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rocketmq/rocketmq-example/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RocketMQ Example
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    CS
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            CS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            C++
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/c%2B%2B/cpp-go-to-modernization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++：走向现代化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/c%2B%2B/practice-of-polymorphism-in-cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    多态实践：继承、覆盖与虚函数
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/python/pep-0333-zh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PEP 333 - Python Web Server Gateway Interface v1.0 中文版
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/java/spring/spring-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security 笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Manual
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Manual
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/manual/create-self-signed-certificate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create self-signed certificate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cs/manual/deploy-mail-server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    使用Postfix+Dovecot+MySQL搭建邮件服务器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Home Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Home Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Networking
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Networking
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    The Complete Guide to HomeLab Networking
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    The Complete Guide to HomeLab Networking
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#设备清单" class="md-nav__link">
+    <span class="md-ellipsis">
+      设备清单
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#故事" class="md-nav__link">
+    <span class="md-ellipsis">
+      故事
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="故事">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#源起" class="md-nav__link">
+    <span class="md-ellipsis">
+      源起
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#转折" class="md-nav__link">
+    <span class="md-ellipsis">
+      转折
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#演进" class="md-nav__link">
+    <span class="md-ellipsis">
+      演进
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#子网划分" class="md-nav__link">
+    <span class="md-ellipsis">
+      子网划分
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acap组网" class="md-nav__link">
+    <span class="md-ellipsis">
+      AC+AP组网
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#猫棒" class="md-nav__link">
+    <span class="md-ellipsis">
+      猫棒
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iptv" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPTV
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homekit" class="md-nav__link">
+    <span class="md-ellipsis">
+      HomeKit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mi-home" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mi Home
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#home-assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Home Assistant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#其它参考" class="md-nav__link">
+    <span class="md-ellipsis">
+      其它参考
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    English
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            English
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Pronunciation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pronunciation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/pronunciation/100%20most%20common%20words%20in%20American%20English/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    100 most common words in American English
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    EF
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            EF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1" id="__nav_5_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            L1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1_1" id="__nav_5_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U1.问候及介绍
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            U1.问候及介绍
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S1.%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S1. 自我介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S2.%E6%8A%8A%E6%82%A8%E7%9A%84%E5%90%8D%E5%AD%97%E5%91%8A%E8%AF%89%E7%BB%99%E6%9F%90%E4%BA%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S2. 把您的名字告诉给某人
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S3.%E4%BA%A4%E6%8D%A2%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S3. 交换电话号码
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S4.%E9%97%AE%E5%80%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S4. 问候
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1_2" id="__nav_5_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U2.办公室和学校
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            U2.办公室和学校
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U2.%E5%8A%9E%E5%85%AC%E5%AE%A4%E5%92%8C%E5%AD%A6%E6%A0%A1/S1.%E8%B0%88%E8%AE%BA%E6%82%A8%E7%9A%84%E8%AF%BE%E5%A0%82/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U2.S1. 谈论您的课堂
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    L4
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            L4
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2_1" id="__nav_5_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U1.娱乐
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            U1.娱乐
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L4/U1.%E5%A8%B1%E4%B9%90/S1.%E6%8F%8F%E8%BF%B0%E4%BC%91%E9%97%B2%E5%A8%B1%E4%B9%90%E7%9A%84%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L4.U1.S1. 描述休闲娱乐的选择
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L4/U1.%E5%A8%B1%E4%B9%90/S2.%E8%B0%88%E8%AE%BA%E5%8D%B3%E5%B0%86%E5%8F%91%E7%94%9F%E7%9A%84%E6%B4%BB%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L4.U1.S2. 谈论即将发生的活动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#设备清单" class="md-nav__link">
+    <span class="md-ellipsis">
+      设备清单
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#故事" class="md-nav__link">
+    <span class="md-ellipsis">
+      故事
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="故事">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#源起" class="md-nav__link">
+    <span class="md-ellipsis">
+      源起
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#转折" class="md-nav__link">
+    <span class="md-ellipsis">
+      转折
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#演进" class="md-nav__link">
+    <span class="md-ellipsis">
+      演进
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#子网划分" class="md-nav__link">
+    <span class="md-ellipsis">
+      子网划分
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#acap组网" class="md-nav__link">
+    <span class="md-ellipsis">
+      AC+AP组网
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#猫棒" class="md-nav__link">
+    <span class="md-ellipsis">
+      猫棒
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iptv" class="md-nav__link">
+    <span class="md-ellipsis">
+      IPTV
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homekit" class="md-nav__link">
+    <span class="md-ellipsis">
+      HomeKit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mi-home" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mi Home
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#home-assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Home Assistant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#其它参考" class="md-nav__link">
+    <span class="md-ellipsis">
+      其它参考
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="the-complete-guide-to-homelab-networking">The Complete Guide to HomeLab Networking<a class="headerlink" href="#the-complete-guide-to-homelab-networking" title="Permanent link">#</a></h1>
+<p>猫棒+主路由拨号+IPTV+IoT(HomeKit/米家)隔离</p>
+<h2 id="设备清单">设备清单<a class="headerlink" href="#设备清单" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://hack-gpon.org/ont-odi-realtek-dfp-34x-2c2/">ODI DFP-34X-2C2</a></li>
+<li><a href="https://wiki.banana-pi.org/Banana_Pi_BPI-R4">Banana Pi BPI-R4</a></li>
+<li><a href="https://item.taobao.com/item.htm?_u=31kjapr9f33f&amp;id=752677600501&amp;spm=a1z09.2.0.0.43b42e8dqEZ8iQ&amp;skuId=5362916995459">hasivo S600WP-4GT-2SX-SE</a></li>
+<li><a href="https://detail.tmall.com/item.htm?_u=31kjapr99736&amp;id=649809693593&amp;skuId=5805750223574&amp;spm=a1z09.2.0.0.43b42e8dqEZ8iQ">兮克 SKS3200M-4GPY2XF</a></li>
+<li><a href="https://www.tp-link.com.cn/product_347.html">TL-AC100</a></li>
+<li><a href="https://www.tp-link.com.cn/product_3434.html">TL-7DR5150易展版</a></li>
+<li><a href="https://www.tp-link.com.cn/product_3304.html">TL-7AP5100HI-PoE易展版</a></li>
+</ul>
+<h2 id="故事">故事<a class="headerlink" href="#故事" title="Permanent link">#</a></h2>
+<h3 id="源起">源起<a class="headerlink" href="#源起" title="Permanent link">#</a></h3>
+<p>22年底装修房子的时候，本着尽快入住的方针，就只做了局部翻新，网络布线没有动。</p>
+<p>如下图所示，弱电箱挂在门口楼梯间，预埋有三路网线+同轴电缆，它们穿过卫生间吊顶，然后分别通向两个卧室和客厅。</p>
+<p><img alt="old network cable installation drawing" src="network-cable-installation-drawing-v0.jpeg" /></p>
+<p>当然了，图示的走线包含推测成分，这些线路具体怎么转角的我并不清楚，直到如今我准备换线时才发现这些预埋的线缆根本抽不出来，想来是活儿做的并不利落。</p>
+<p>当时的网络需求十分简单——全屋Wifi，所以网络拓扑也是分外的简洁：弱电箱放光猫，客厅放Wifi路由器。同时为了简化穿透配置，宽带移机时找师傅把光猫改了桥接，并求了公网IP，然后使用路由器拨号，并且配置DDNS和端口映射。</p>
+<p>如此，两个卧室的网口只是徒有其表，并不具备实际功用。凭此问题，一股难言的情绪便一直萦绕心头，时常反复。</p>
+<h3 id="转折">转折<a class="headerlink" href="#转折" title="Permanent link">#</a></h3>
+<p>我一直想把卧室的两个网口实装起来，也研究了单臂路由等方案，但一直没有动手。</p>
+<p>2024年春节前夕，久无人居的楼下邻居因为漏水问题找上门来，一番折腾后我决定年后翻修卫生间。</p>
+<p>借此机会，我开始重新设计网络结构。</p>
+<h3 id="演进">演进<a class="headerlink" href="#演进" title="Permanent link">#</a></h3>
+<p>在第一个版本的方案中，我计划利用原有的刷了梅林固件的ASUS RT-AX88U，实施单臂路由。然后下单了兮克 SKS3200M-4GPY2XF。</p>
+<p>3月31日，花费一天时间研究梅林的文档，单臂路由方案搞定，非常easy。</p>
+<p>于是心思开始发散了：想看电视节目？IPTV安排上；交换机是2.5G的，怎么跑满带宽？给RT-AX88U加个2.5G的网卡；交换机光口怎么用？猫棒安排上；还空一个电口怎么用？给书房穿根线吧；网线怎么选？万兆超六类屏蔽线！</p>
+<p>至于结果嘛……经过20多天的折腾：猫棒配好了；费了九牛二虎之力，给吊顶开洞下管，最后穿了一根贼粗的秋叶原网线；
+RT-AX88U这边则十分不顺利，外接网卡一直掉线，IPTV难配DHCP。硬啃了多日梅林的源码，最后无奈放弃。
+这期间又想给书房拉条光纤，皮线or跳线，冷接or熔接……</p>
+<p><img alt="new network cable installation drawing" src="network-cable-installation-drawing-v1.jpeg" /></p>
+<p>放弃RT-AX88U做主路由后，我决定转向openwrt平台。在网上一番搜索，最后相中了Banana Pi的BPI-R4。</p>
+<p><img alt="banana pi bpi-r4" src="bpi-r4.jpeg" /></p>
+<p>5月2日，由于调试网络过程中频繁的插拔操作，我把入户光纤的接头搞坏了。感谢联通师傅快速上门维修。</p>
+<p><img alt="repair fiber" src="20241104-000200.jpeg" /></p>
+<p>前面说过我想给书房拉条光纤，我这时候决定穿一根单模双芯的LC-LC成品跳线。成品跳线的接口大小是没法穿过已有超六类屏蔽线的20管的，所以我要先把网线抽出来。这根又粗又硬的网线，其穿管的困难程度，光想想就令人想放弃。这就迫使我考虑代替方案的可能性。</p>
+<p>早在4月底的时候，我在和朋友的一次会面中得知了细网线这种东西，它主要用于短距离跳线场景。于是我将目标放在了高规格的细网线上。只能说功夫不负有心人。</p>
+<p>随着弱电箱中设备和线缆的增加，其混乱程度已令我不忍直视，于是又找了一些改装配件，动手整理。</p>
+<p>5月12日，弱电箱整理完成。</p>
+<p><img alt="router enclosure without poe" src="router-enclosure-v0.jpeg" /></p>
+<p>为方便调试，这时的猫棒直接插在交换机上，路由器则放在书房中，配置单臂复用。</p>
+<p>6月1日，调整猫棒，支持自动协商到2.5G。</p>
+<p>直到此时，我仍计划用RT-AX88U来支持全屋wifi。然而，实际测试表明，wifi穿墙后信号强度很差。再加上老婆在卧室的实际体感，和极差的IPTV配置体验，我决定彻底放弃RT-AX88U，转而寻找AC+AP组网方案。</p>
+<p>一番调查过后，我发现TP-Link是一个还算可以的低成本平台，在wifi7上有领先的产品布局。这改变了我一直以为对于TP-Link的品牌印象。另外，面板式AP可以使用PoE供电，整洁不占空间，这对卧室环境十分友好。</p>
+<p>6月6日，收到客厅AP，安装。</p>
+<p>6月7日，弱电箱散热改造。</p>
+<p>6月10日，收到AC100。</p>
+<p>6月13日，收到PoE交换机、卧室面板AP，安装。</p>
+<p>随着openwrt配置基本稳定，为优化线路结构，我便将路由器移到了弱电箱中。猫棒则可以直接插到路由器，也不用再在交换机上配置复杂的vlan。</p>
+<p><img alt="router enclosure with poe" src="router-enclosure-v1.jpeg" /></p>
+<p>这一版方案仍不完美：PoE交换机的功率要求大增，小型的路由器UPS已经没法满足供电要求。因此，我又穿了一根从书房到弱电箱的RVV 1.5平的3芯电缆，计划接UPS供电。</p>
+<h2 id="子网划分">子网划分<a class="headerlink" href="#子网划分" title="Permanent link">#</a></h2>
+<ul>
+<li>WAN: VLAN 3961</li>
+<li>IPTV: VLAN 3964, VLAN 4000</li>
+<li>LAN: VLAN 20</li>
+<li>IoT: VLAN 21</li>
+<li>Ctrl: VLAN 42</li>
+</ul>
+<h2 id="acap组网">AC+AP组网<a class="headerlink" href="#acap组网" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://openwrt.org/docs/guide-user/network/wifi/dumbap">AP</a></li>
+<li><a href="https://smb.tp-link.com.cn/service/detail_article_2240.html">AC+AP三层组网</a></li>
+</ul>
+<h2 id="猫棒">猫棒<a class="headerlink" href="#猫棒" title="Permanent link">#</a></h2>
+<p>北京联通的IPTV线路，即使没有加组，也会一直发送CCTV1的数据，使openwrt上的接口统计数据一直涨。如果在意的话。可以在猫棒上开启IGMP Snooping消除不必要的流量。
+比较坑爹的是，我所使用的240408版本固件的IGMP Snooping有问题，开启以后在很多情况下正常的组播流量也收不到了。</p>
+<ul>
+<li><a href="https://github.com/Anime4000/RTL960x/issues/271#issuecomment-2067501561">240408 firmware</a></li>
+<li><a href="https://github.com/Anime4000/RTL960x/discussions/250">SFP EEPROM for 2.5G AutoNeg</a></li>
+</ul>
+<h2 id="iptv">IPTV<a class="headerlink" href="#iptv" title="Permanent link">#</a></h2>
+<p>iptv接口在高级设置中勾选“使用默认网关”（Use default gateway），同时设置“使用网关跃点”（Use gateway metric）使其值大于wan接口的对应配置。</p>
+<p>勾选“使用默认网关”可以设置网关路由，否则不能连接DHCP服务器，DHCP的Renew可能会失败。</p>
+<p><img alt="DHCP Renew Failed" src="dhcp-renew-failed.png" /></p>
+<p>配置“使用网关跃点”则确保iptv接口的默认路由优先级低于wan接口，否则会上不了网。</p>
+<p>组播代理使用<a href="https://github.com/openwrt/omcproxy">omcproxy</a>。开始的时候使用igmpproxy，这个没有luci app不能从web管理，后来看到了omcproxy就换了。使用下来感觉omcproxy更稳定，用igmpproxy总是卡顿。还有一个<a href="https://github.com/mcproxy/mcproxy">mcproxy</a>，好久没更新了，没有尝试。</p>
+<p>组播转单播使用<a href="https://github.com/pcherenkov/udpxy">udpxy</a>。还有一个<a href="https://github.com/oskar456/rtp2httpd">rtp2httpd</a>，也有<a href="https://github.com/stackia/rtp2httpd">支持FCC的修改</a>，但OpenWrt中没有现成的包，所以没有尝试。</p>
+<p>尽管omcproxy和udpxy可以共存，没有组播需求的情况下推荐只配置udpxy。</p>
+<ul>
+<li><a href="https://openwrt.org/docs/guide-user/network/wan/udp_multicast">IPTV / UDP multicast</a></li>
+</ul>
+<h2 id="homekit">HomeKit<a class="headerlink" href="#homekit" title="Permanent link">#</a></h2>
+<p>HomeKit设备通过Bonjour（zeroconf）技术实现服务发现自组网。如果同一设备在短时间内以不同的IP接入（如接入的子网发生变化），该设备会被重命名，在原有的名称后追加“(2)”后缀。</p>
+<p>OpenWrt的文档中推荐使用<a href="https://github.com/openwrt/mdnsd">umdns</a>，试了一下，最后发现<a href="https://openwrt.org/docs/guide-developer/mdns#config_file">不支持作为Repeater</a>。最后换成了avahi。</p>
+<ul>
+<li><a href="https://openwrt.org/docs/guide-user/network/zeroconfig/zeroconf">Zero configuration networking in OpenWrt</a></li>
+<li><a href="https://blog.christophersmart.com/2020/03/30/resolving-mdns-across-vlans-with-avahi-on-openwrt/">Resolving mDNS across VLANs with Avahi on OpenWRT</a></li>
+<li><a href="https://www.jianshu.com/p/390f22a6056f">局域网设备发现之Bonjour协议</a></li>
+</ul>
+<h2 id="mi-home">Mi Home<a class="headerlink" href="#mi-home" title="Permanent link">#</a></h2>
+<p>米家设备本地控制会限制数据包的来源子网，不是相同子网来的数据包直接不理会。所以，跨子网通信要配置NAT或IP动态伪装（Masquerading）。</p>
+<h2 id="home-assistant">Home Assistant<a class="headerlink" href="#home-assistant" title="Permanent link">#</a></h2>
+<p>由于Docker Hub被墙，Matter Server加载项无法安装，需要配置proxy。</p>
+<p>HA支持Yeelight集成，其设备自动发现使用魔改的SSDP协议，在我的网络拓扑下需要把组播数据包从lan子网转发到iot子网，可以使用smcroute配置路由。
+但因为我已经配置了omcproxy，smcroute添加的路由会被覆盖，最后我停掉了omcproxy。</p>
+<ul>
+<li><a href="https://github.com/home-assistant/operating-system/discussions/2797">Config docker-daemon.json</a></li>
+<li><a href="https://www.yeelight.com/download/Yeelight_Inter-Operation_Spec.pdf">Yeelight WiFi Light Inter-Operation Specification</a></li>
+</ul>
+<h2 id="其它参考">其它参考<a class="headerlink" href="#其它参考" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://wu.renjie.im/blog/network/ax88u-nbase-t/zh-cn/">在 AX88U + Merlin 384.19 上配置基于 RTL8156B 的 2.5GbE 网卡</a></li>
+<li><a href="https://wu.renjie.im/blog/network/ax88u-nbase-t/">Towards 2.5GbE (NBASE-T) on ASUS RT-AX88U with RTL8156B and Asuswrt-Merlin 384.19</a></li>
+<li><a href="https://www.snbforums.com/threads/need-help-to-compile-realtek-r8152-driver-for-rt-ax88u.89035/">Need help to compile Realtek r8152 driver for RT-AX88U</a></li>
+<li><a href="https://gist.github.com/RikshaDriver/0388ba3f38f89eb975ebb0b915860ec2">Compiling Realtek RTL 8152, 8156 and 8157 drivers for QNAP NAS</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.top", "search.highlight"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

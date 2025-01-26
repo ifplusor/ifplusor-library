@@ -1,0 +1,3002 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://library.ifplusor.win/cs/python/pep-0333-zh/">
+      
+      
+        <link rel="prev" href="../../c%2B%2B/practice-of-polymorphism-in-cpp/">
+      
+      
+        <link rel="next" href="../../java/spring/spring-security/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>PEP 333 - Python Web Server Gateway Interface v1.0 中文版 - ifplusor's library</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.a40c8224.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pep-333---python-web-server-gateway-interface-v10-中文版" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="ifplusor&#39;s library" class="md-header__button md-logo" aria-label="ifplusor's library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ifplusor's library
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PEP 333 - Python Web Server Gateway Interface v1.0 中文版
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ifplusor/ifplusor-library" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ifplusor-library
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../welcome/" class="md-tabs__link">
+          
+  
+  Welcome
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../rocketmq/rocketmq-example/" class="md-tabs__link">
+          
+  
+  RocketMQ
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../c%2B%2B/cpp-go-to-modernization/" class="md-tabs__link">
+          
+  
+  CS
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../homelabs/networking/complete-guide/" class="md-tabs__link">
+          
+  
+  Home Labs
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../english/pronunciation/100%20most%20common%20words%20in%20American%20English/" class="md-tabs__link">
+          
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ifplusor&#39;s library" class="md-nav__button md-logo" aria-label="ifplusor's library" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ifplusor's library
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ifplusor/ifplusor-library" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ifplusor-library
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Welcome
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../welcome/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hello
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../welcome/read-list/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    书单
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RocketMQ
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            RocketMQ
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rocketmq/rocketmq-example/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RocketMQ Example
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    CS
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            CS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            C++
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B/cpp-go-to-modernization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++：走向现代化
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B/practice-of-polymorphism-in-cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    多态实践：继承、覆盖与虚函数
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PEP 333 - Python Web Server Gateway Interface v1.0 中文版
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    PEP 333 - Python Web Server Gateway Interface v1.0 中文版
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#目录" class="md-nav__link">
+    <span class="md-ellipsis">
+      目录
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#序言-preface" class="md-nav__link">
+    <span class="md-ellipsis">
+      序言 (Preface)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#摘要-abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      摘要 (Abstract)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#基本原理及目标-rationale-and-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本原理及目标 (Rationale and Goals)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#规范概述-specification-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      规范概述 (Specification Overview)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="规范概述 (Specification Overview)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#应用程序框架端-the-applicationframework-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      应用程序/框架端 (The Application/Framework Side)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#服务器网关端-the-servergateway-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务器/网关端 (The Server/Gateway Side)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#中间件可扮演两端角色的组件-middleware-components-that-play-both-sides" class="md-nav__link">
+    <span class="md-ellipsis">
+      中间件：可扮演两端角色的组件 (Middleware: Components that Play Both Sides)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#规范细则-specification-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      规范细则 (Specification Details)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="规范细则 (Specification Details)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environ变量-environ-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      environ变量 (environ Variables)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="environ变量 (environ Variables)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#输入流和错误流-input-and-error-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      输入流和错误流 (Input and Error Streams)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start_response函数-the-start_response-callable" class="md-nav__link">
+    <span class="md-ellipsis">
+      start_response()函数 (The start_response() Callable)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#处理content-length首部-handling-the-content-length-header" class="md-nav__link">
+    <span class="md-ellipsis">
+      处理Content-Length首部 (Handling the Content-Length Header)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#缓冲和流-buffering-and-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      缓冲和流 (Buffering and Streaming)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="缓冲和流 (Buffering and Streaming)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#中间件的块边界处理-middleware-handling-of-block-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      中间件的块边界处理 (Middleware Handling of Block Boundaries)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write函数-the-write-callable" class="md-nav__link">
+    <span class="md-ellipsis">
+      write()函数 (The write() Callable)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unicode问题-unicode-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unicode问题 (Unicode Issues)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#错误处理-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      错误处理 (Error Handling)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http-11-expectcontinue-机制-http-11-expectcontinue" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP 1.1 Expect/Continue 机制 (HTTP 1.1 Expect/Continue)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http的其他特性-other-http-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP的其他特性 (Other HTTP Features)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#线程支持-thread-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      线程支持 (Thread Support)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#具体实现应用程序备注-implementationapplication-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体实现/应用程序备注 (Implementation/Application Notes)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="具体实现/应用程序备注 (Implementation/Application Notes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#服务器扩展apis-server-extension-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务器扩展APIs (Server Extension APIs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#应用程序配置-application-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      应用程序配置 (Application Configuration)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url的重建-url-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      URL的重建 (URL Reconstruction)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#对旧版本python22之前的支持-supporting-older-versions-of-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      对旧版本Python(2.2之前)的支持 (Supporting Older Versions of Python)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#可选的平台相关文件处理-optional-platform-specific-file-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      可选的平台相关文件处理 (Optional Platform-Specific File Handling)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#问答环节-questions-and-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      问答环节 (Questions and Answers)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#尚在讨论中的提议-proposedunder-discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      尚在讨论中的提议 (Proposed/Under Discussion)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#鸣谢-acknowledgements" class="md-nav__link">
+    <span class="md-ellipsis">
+      鸣谢 (Acknowledgements)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考文献-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考文献 (References)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#版权-copyright" class="md-nav__link">
+    <span class="md-ellipsis">
+      版权 (Copyright)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Java
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Spring
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/spring-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spring Security 笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Manual
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Manual
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manual/create-self-signed-certificate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create self-signed certificate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manual/deploy-mail-server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    使用Postfix+Dovecot+MySQL搭建邮件服务器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Home Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Networking
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Networking
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../homelabs/networking/complete-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Complete Guide to HomeLab Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    English
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            English
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Pronunciation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Pronunciation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/pronunciation/100%20most%20common%20words%20in%20American%20English/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    100 most common words in American English
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    EF
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            EF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1" id="__nav_5_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            L1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1_1" id="__nav_5_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U1.问候及介绍
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            U1.问候及介绍
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S1.%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S1. 自我介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S2.%E6%8A%8A%E6%82%A8%E7%9A%84%E5%90%8D%E5%AD%97%E5%91%8A%E8%AF%89%E7%BB%99%E6%9F%90%E4%BA%BA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S2. 把您的名字告诉给某人
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S3.%E4%BA%A4%E6%8D%A2%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S3. 交换电话号码
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U1.%E9%97%AE%E5%80%99%E5%8F%8A%E4%BB%8B%E7%BB%8D/S4.%E9%97%AE%E5%80%99/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U1.S4. 问候
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_1_2" id="__nav_5_2_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U2.办公室和学校
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            U2.办公室和学校
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L1/U2.%E5%8A%9E%E5%85%AC%E5%AE%A4%E5%92%8C%E5%AD%A6%E6%A0%A1/S1.%E8%B0%88%E8%AE%BA%E6%82%A8%E7%9A%84%E8%AF%BE%E5%A0%82/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1.U2.S1. 谈论您的课堂
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    L4
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            L4
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2_1" id="__nav_5_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    U1.娱乐
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            U1.娱乐
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L4/U1.%E5%A8%B1%E4%B9%90/S1.%E6%8F%8F%E8%BF%B0%E4%BC%91%E9%97%B2%E5%A8%B1%E4%B9%90%E7%9A%84%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L4.U1.S1. 描述休闲娱乐的选择
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../english/ef/L4/U1.%E5%A8%B1%E4%B9%90/S2.%E8%B0%88%E8%AE%BA%E5%8D%B3%E5%B0%86%E5%8F%91%E7%94%9F%E7%9A%84%E6%B4%BB%E5%8A%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L4.U1.S2. 谈论即将发生的活动
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#目录" class="md-nav__link">
+    <span class="md-ellipsis">
+      目录
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#序言-preface" class="md-nav__link">
+    <span class="md-ellipsis">
+      序言 (Preface)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#摘要-abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      摘要 (Abstract)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#基本原理及目标-rationale-and-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本原理及目标 (Rationale and Goals)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#规范概述-specification-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      规范概述 (Specification Overview)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="规范概述 (Specification Overview)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#应用程序框架端-the-applicationframework-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      应用程序/框架端 (The Application/Framework Side)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#服务器网关端-the-servergateway-side" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务器/网关端 (The Server/Gateway Side)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#中间件可扮演两端角色的组件-middleware-components-that-play-both-sides" class="md-nav__link">
+    <span class="md-ellipsis">
+      中间件：可扮演两端角色的组件 (Middleware: Components that Play Both Sides)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#规范细则-specification-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      规范细则 (Specification Details)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="规范细则 (Specification Details)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environ变量-environ-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      environ变量 (environ Variables)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="environ变量 (environ Variables)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#输入流和错误流-input-and-error-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      输入流和错误流 (Input and Error Streams)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start_response函数-the-start_response-callable" class="md-nav__link">
+    <span class="md-ellipsis">
+      start_response()函数 (The start_response() Callable)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#处理content-length首部-handling-the-content-length-header" class="md-nav__link">
+    <span class="md-ellipsis">
+      处理Content-Length首部 (Handling the Content-Length Header)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#缓冲和流-buffering-and-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      缓冲和流 (Buffering and Streaming)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="缓冲和流 (Buffering and Streaming)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#中间件的块边界处理-middleware-handling-of-block-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      中间件的块边界处理 (Middleware Handling of Block Boundaries)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write函数-the-write-callable" class="md-nav__link">
+    <span class="md-ellipsis">
+      write()函数 (The write() Callable)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unicode问题-unicode-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unicode问题 (Unicode Issues)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#错误处理-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      错误处理 (Error Handling)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http-11-expectcontinue-机制-http-11-expectcontinue" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP 1.1 Expect/Continue 机制 (HTTP 1.1 Expect/Continue)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#http的其他特性-other-http-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP的其他特性 (Other HTTP Features)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#线程支持-thread-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      线程支持 (Thread Support)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#具体实现应用程序备注-implementationapplication-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      具体实现/应用程序备注 (Implementation/Application Notes)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="具体实现/应用程序备注 (Implementation/Application Notes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#服务器扩展apis-server-extension-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务器扩展APIs (Server Extension APIs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#应用程序配置-application-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      应用程序配置 (Application Configuration)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url的重建-url-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      URL的重建 (URL Reconstruction)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#对旧版本python22之前的支持-supporting-older-versions-of-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      对旧版本Python(2.2之前)的支持 (Supporting Older Versions of Python)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#可选的平台相关文件处理-optional-platform-specific-file-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      可选的平台相关文件处理 (Optional Platform-Specific File Handling)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#问答环节-questions-and-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      问答环节 (Questions and Answers)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#尚在讨论中的提议-proposedunder-discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      尚在讨论中的提议 (Proposed/Under Discussion)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#鸣谢-acknowledgements" class="md-nav__link">
+    <span class="md-ellipsis">
+      鸣谢 (Acknowledgements)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考文献-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考文献 (References)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#版权-copyright" class="md-nav__link">
+    <span class="md-ellipsis">
+      版权 (Copyright)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="pep-333---python-web-server-gateway-interface-v10-中文版">PEP 333 - Python Web Server Gateway Interface v1.0 中文版<a class="headerlink" href="#pep-333---python-web-server-gateway-interface-v10-中文版" title="Permanent link">#</a></h1>
+<blockquote>
+<p>翻译自 <a href="https://www.python.org/dev/peps/pep-0333/">PEP 333 - Python Web Server Gateway Interface v1.0</a><br />
+原始文本参考 <a href="https://github.com/mainframer/PEP333-zh-CN">mainframer/PEP333-zh-CN</a>，并做校正。</p>
+</blockquote>
+<h2 id="目录">目录<a class="headerlink" href="#目录" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="./#目录">目录</a></li>
+<li><a href="./#序言-preface">序言 (Preface)</a></li>
+<li><a href="./#摘要-abstract">摘要 (Abstract)</a></li>
+<li><a href="./#基本原理及目标-rationale-and-goals">基本原理及目标 (Rationale and Goals)</a></li>
+<li><a href="./#规范概述-specification-overview">规范概述 (Specification Overview)</a><ul>
+<li><a href="./#应用程序框架端-the-applicationframework-side"><strong>应用程序/框架</strong>端 (The Application/Framework Side)</a></li>
+<li><a href="./#服务器网关端-the-servergateway-side"><strong>服务器/网关</strong>端 (The Server/Gateway Side)</a></li>
+<li><a href="./#中间件可扮演两端角色的组件-middleware-components-that-play-both-sides">中间件：可扮演两端角色的组件 (Middleware: Components that Play Both Sides)</a></li>
+</ul>
+</li>
+<li><a href="./#规范细则-specification-details">规范细则 (Specification Details)</a><ul>
+<li><a href="./#environ变量-environ-variables"><code>environ</code>变量 (<code>environ</code> Variables)</a><ul>
+<li><a href="./#输入流和错误流-input-and-error-streams">输入流和错误流 (Input and Error Streams)</a></li>
+</ul>
+</li>
+<li><a href="./#start_response函数-the-start_response-callable"><code>start_response()</code>函数 (The <code>start_response()</code> Callable)</a></li>
+<li><a href="./#处理content-length首部-handling-the-content-length-header">处理<code>Content-Length</code>首部 (Handling the <code>Content-Length</code> Header)</a></li>
+<li><a href="./#缓冲和流-buffering-and-streaming">缓冲和流 (Buffering and Streaming)</a><ul>
+<li><a href="./#中间件的块边界处理-middleware-handling-of-block-boundaries">中间件的块边界处理 (Middleware Handling of Block Boundaries)</a></li>
+<li><a href="./#write函数-the-write-callable"><code>write()</code>函数 (The <code>write()</code> Callable)</a></li>
+</ul>
+</li>
+<li><a href="./#unicode问题-unicode-issues">Unicode问题 (Unicode Issues)</a></li>
+<li><a href="./#错误处理-error-handling">错误处理 (Error Handling)</a></li>
+<li><a href="./#http-11-expectcontinue-机制-http-11-expectcontinue">HTTP 1.1 Expect/Continue 机制 (HTTP 1.1 Expect/Continue)</a></li>
+<li><a href="./#http的其他特性-other-http-features">HTTP的其他特性 (Other HTTP Features)</a></li>
+<li><a href="./#线程支持-thread-support">线程支持 (Thread Support)</a></li>
+</ul>
+</li>
+<li><a href="./#具体实现应用程序备注-implementationapplication-notes">具体实现/应用程序备注 (Implementation/Application Notes)</a><ul>
+<li><a href="./#服务器扩展apis-server-extension-apis">服务器扩展APIs (Server Extension APIs)</a></li>
+<li><a href="./#应用程序配置-application-configuration">应用程序配置 (Application Configuration)</a></li>
+<li><a href="./#url的重建-url-reconstruction">URL的重建 (URL Reconstruction)</a></li>
+<li><a href="./#对旧版本python22之前的支持-supporting-older-versions-of-python">对旧版本Python(2.2之前)的支持 (Supporting Older Versions of Python)</a></li>
+<li><a href="./#可选的平台相关文件处理-optional-platform-specific-file-handling">可选的平台相关文件处理 (Optional Platform-Specific File Handling)</a></li>
+</ul>
+</li>
+<li><a href="./#问答环节-questions-and-answers">问答环节 (Questions and Answers)</a></li>
+<li><a href="./#尚在讨论中的提议-proposedunder-discussion">尚在讨论中的提议 (Proposed/Under Discussion)</a></li>
+<li><a href="./#鸣谢-acknowledgements">鸣谢 (Acknowledgements)</a></li>
+<li><a href="./#参考文献-references">参考文献 (References)</a></li>
+<li><a href="./#版权-copyright">版权 (Copyright)</a></li>
+</ul>
+<h2 id="序言-preface">序言 (Preface)<a class="headerlink" href="#序言-preface" title="Permanent link">#</a></h2>
+<p>注意：关于本规范的后续版本，请参照<a href="https://www.python.org/dev/peps/pep-3333">PEP 3333</a>，PEP 3333是支持Python 3.x的新版本，同时还包含了一些社区勘误，补充，更正的相关说明信息。</p>
+<h2 id="摘要-abstract">摘要 (Abstract)<a class="headerlink" href="#摘要-abstract" title="Permanent link">#</a></h2>
+<p>这份规范规定了一种在web服务器与web应用程序/框架之间推荐的标准接口，以确保web应用程序在不同的web服务器之间具有可移植性。</p>
+<h2 id="基本原理及目标-rationale-and-goals">基本原理及目标 (Rationale and Goals)<a class="headerlink" href="#基本原理及目标-rationale-and-goals" title="Permanent link">#</a></h2>
+<p>Python目前拥有大量的web框架，比如Zope、Quixote、Webware、SkunkWeb、PSO和Twisted Web——这里我仅列举出这么几个<a href="https://wiki.python.org/moin/WebProgramming" title="The Python Wiki &quot;Web Programming&quot; topic">[1]</a>。这么多的选择让新手无所适从，因为整体上，选择什么样的框架有时会反过来限制对web服务器的选择。</p>
+<p>相比之下，虽然java也拥有众多web的框架，但是java的<strong>servlet API</strong>使得用任何框架编写出来的应用程序都可以在所有支持<strong>servlet API</strong>的web服务器上运行。</p>
+<p>服务器中这种针对Python的API的使用和普及（<strong>不管服务器是用python写的（如: Medusa），还是内嵌python（如: mod_python），亦或是通过一种网关协议来调用Python（如:CGI, FastCGI等）</strong>），把人们从web框架的选择和web服务器的选择中剥离开来，使他们能够任意选择适合自己的组合，而web服务器和web框架的开发者们也能够把精力集中到各自的领域。  </p>
+<p>鉴于此，这份PEP建议在web服务器和web应用程序/web框架之间建立一种简单通用的接口规范，即Python Web服务器网关接口（简称WSGI）。</p>
+<p>但是光有这么一份规范，对于改变web服务器和web应用程序/框架的现状还是不够的，只有当那些web服务器和web框架的作者/维护者们真正地实现了WSGI，这份WSGI规范才能起到它该起的作用。  </p>
+<p>不过，由于目前还没有任何框架或服务器实现了WSGI，而那些新转向支持WSGI的框架作者们也不会从我们这得到任何直接的奖励或者好处，所以，我们的这份WSGI<strong>必须</strong>要拟定得足够容易实现，这样才能降低框架作者们在实现接口这件事上的初始投资成本。</p>
+<p>由此可见，服务器和框架两边接口实现的简单性，对于提高WSGI的实用性来说，绝对是非常重要的，同时，这一点也是任何设计决策的首要依据。</p>
+<p>然而需要注意的是，框架作者实现框架时的简单性和web应用程序开发者使用框架时的易用性是两码事。WSGI为框架作者们提出了一套只包含必需、最基本元素的接口，因为像响应对象以及 cookie 处理等这些花哨的高级功能只会妨碍现有的框架对这些问题的处理。再说一次，WSGI的目标是使现有的web服务器和web框架之间更加方便地互联互通，而不是想重新创建一套新的web框架。</p>
+<p>同时也要注意到，我们的这个目标也限制了WSGI不会用到任何当前版本的Python里没有的东西。因此，这一份规范中不会推荐或要求任何新的Python标准模块，WSGI中规定的所有东西都不需要2.2.2以上版本的Python支持。（当然，在未来版本的Python标准库中，倘若Python自带的标准库中的Web服务器能够包含对我们这份接口的支持，那将会是一个很不错的主意。)</p>
+<p>除了要让现有的以及将要出现的框架和服务器容易实现之外，也应该让创建诸如请求预处理器<code>(request preprocessors)</code>、响应后处理器<code>(response postprocessors)</code>及其他基于WSGI的中间件组件这一类事情变得简单易操作。这里说的中间件组件，它们是这样一种东西：对服务器来说它们是应用程序，而对中间件包含的应用程序来说，它们又可以被看作是服务器。</p>
+<p>如果中间件既简单又鲁棒，并且WSGI可以广泛地应用在服务器和框架中，那么就有可能出现全新的Python web框架：一个由若干个WSGI中间件组件组成的松耦合的框架。事实上，现有框架的作者们甚至可能会选择去重构他们框架中已有的服务，使它们变得更像是一些配合WSGI使用的库而不是一个完整的框架。这样一来，web应用程序开发者们这就可以为他们想实现的特定功能选择最佳组合的组件，而不用再局限于某一个特定框架并忍受该框架的所有优缺点。</p>
+<p>当然，就现在来说，这一天毫无疑问还要等很久。同时，对WSGI来说，让每一个框架都能在任何服务器上运行起来，又是一个十足的短期目标。</p>
+<p>最后，需要指出的是，此版本的WSGI对于一个应用程序具体该以何种方式部署在web服务器或者服务器网关上并没有做具体说明。就现在来看，这个是需要由服务器或网关来负责定义怎么实现的。等到以后，等有了足够多的服务器/网关通过实现了WSGI并积累了多样化的部署需求方面的领域经验，那么到时候也许会产生另一份PEP来描述WSGI服务器和应用框架的部署标准。</p>
+<h2 id="规范概述-specification-overview">规范概述 (Specification Overview)<a class="headerlink" href="#规范概述-specification-overview" title="Permanent link">#</a></h2>
+<p>WSGI接口可以分为两端：服务器/网关端和应用程序/Web框架端。服务器端调用一个由应用程序端提供的可调用对象<code>(Callable)</code>，至于它是如何被调用的，这要取决于服务器/网关这一端。我们假定有一些服务器/网关会要求应用程序的部署人员编写一个简短的脚本来启动一个服务器/网关的实例，并提供给服务器/网关一个应用程序对象，而还有的一些服务器/网关则不需要这样，它们会需要一个配置文件又或者是其他机制来指定应该从哪里导入或者获得应用程序对象。</p>
+<p>除了单纯的服务器/网关和应用程序/框架，还可以创建一种叫做中间件的组件，中间件它对这份规范当中的两端(服务器端和应用程序端)都做了实现，我们可以这样解释中间件，对于包含它们的服务器，中间件是应用程序，而对于包含在中间件当中的应用程序来说，它又扮演着服务器的角色。不仅如此，中间件还可以用来提供可扩展的API，以及内容转换，导航和其他有用的功能。</p>
+<p>在这份规范说明书中，我们将使用的术语<code>“可调用对象(a callable)”</code>，它的意思是“<strong>一个函数，方法，类或者拥有<code>__call__</code>方法的一个对象实例</strong>”，这取决于服务器，网关或者应用程序根据需要而选择的合适的实现技术。相反，服务器，网关或者请求一个可调用对象<code>(callable)</code>的应用程序<strong>必须不</strong>依赖可调用对象<code>(callable)</code>的具体提供方式。记住，可调用对象<code>(callable)</code>只是被调用，不会自省<code>(introspect)</code>。[<strong>译者注：introspect，自省，Python的强项之一，指的是代码可以在内存中象处理对象一样查找其它的模块和函数。</strong>]</p>
+<h3 id="应用程序框架端-the-applicationframework-side"><strong>应用程序/框架</strong>端 (The Application/Framework Side)<a class="headerlink" href="#应用程序框架端-the-applicationframework-side" title="Permanent link">#</a></h3>
+<p>一个应用程序对象简单地说就是一个接受了2个参数的可调用对象<code>(callable object)</code>，这里的对象并不能理解为它真的需要一个对象实例：一个函数、方法、类或者带有<code>__call__</code>方法的对象实例都可以用来当做应用程序对象。应用程序对象必须可以被多次调用，实质上所有的服务器/网关（除了CGI）都会产生这样的重复请求。</p>
+<p>（注意：虽然我们把它叫做“应用程序”对象，但这并不意味着程序员需要把WSGI当做API来调用！我们假定应用程序开发者将会仍然使用更高层的框架服务来开发它们的应用程序，WSGI只是一个提供给框架和服务器开发者们使用的工具，它并没有打算直接向应用程序开发者提供支持。)</p>
+<p>这里我们来看两个应用程序对象的示例：其中，一个是函数，另一个是类：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">def</span><span class="w"> </span><span class="nf">simple_app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;这可能是最简单的应用程序对象了。&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;200 OK&#39;</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">)]</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;Hello world!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="k">class</span><span class="w"> </span><span class="nc">AppClass</span><span class="p">:</span>
+<span class="linenos" data-linenos="10 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;生成相同的输出，但是使用的是一个类。</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="sd">    （注意：这里‘AppClass’就是一个“应用程序”，故调用它会返回一个‘AppClass’的实例，</span>
+<span class="linenos" data-linenos="13 "></span><span class="sd">    这个实例就是规范里面说的由一个“可调用的应用程序(application callable)”返回的</span>
+<span class="linenos" data-linenos="14 "></span><span class="sd">    可迭代者(iterable)。</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span><span class="sd">    如果我们希望使用‘AppClass’的实例，而不是应用程序对象，那么我们就必须实现这个</span>
+<span class="linenos" data-linenos="17 "></span><span class="sd">    ‘__call__’方法，这个方法将用来执行应用程序，然后我们需要创建一个实例来提供给</span>
+<span class="linenos" data-linenos="18 "></span><span class="sd">    服务器/网关使用。</span>
+<span class="linenos" data-linenos="19 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">environ</span> <span class="o">=</span> <span class="n">environ</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start_response</span>
+<span class="linenos" data-linenos="24 "></span>
+<span class="linenos" data-linenos="25 "></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;200 OK&#39;</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Content-type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">)]</span>
+<span class="linenos" data-linenos="28 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">)</span>
+<span class="linenos" data-linenos="29 "></span>        <span class="k">yield</span> <span class="s2">&quot;Hello world!</span><span class="se">\n</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h3 id="服务器网关端-the-servergateway-side"><strong>服务器/网关</strong>端 (The Server/Gateway Side)<a class="headerlink" href="#服务器网关端-the-servergateway-side" title="Permanent link">#</a></h3>
+<p>每一次，当HTTP客户端冲着应用程序发来一个请求，服务器/网关都会调用应用程序的可调用对象<code>(callable)</code>。为了阐述方便，这里有一个CGI网关，简单的说它就是一个以应用程序对象为参数的函数实现，注意，本例中对错误只做了有限的处理，因为默认情况下没有被捕获到的异常都会被输出到<code>sys.stderr</code>并被服务器记录下来。</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">def</span><span class="w"> </span><span class="nf">run_with_cgi</span><span class="p">(</span><span class="n">application</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">environ</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.input&#39;</span><span class="p">]</span>        <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.errors&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.version&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.multithread&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.multiprocess&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.run_once&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span>    <span class="k">if</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;HTTPS&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.url_scheme&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.url_scheme&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;http&#39;</span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span>    <span class="n">headers_set</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="n">headers_sent</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">headers_set</span><span class="p">:</span>
+<span class="linenos" data-linenos="23 "></span>             <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;write() before start_response()&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="24 "></span>
+<span class="linenos" data-linenos="25 "></span>        <span class="k">elif</span> <span class="ow">not</span> <span class="n">headers_sent</span><span class="p">:</span>
+<span class="linenos" data-linenos="26 "></span>             <span class="c1"># 在第一次输出之前发送已存储的报头。</span>
+<span class="linenos" data-linenos="27 "></span>             <span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span> <span class="o">=</span> <span class="n">headers_sent</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">headers_set</span>
+<span class="linenos" data-linenos="28 "></span>             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Status: </span><span class="si">%s</span><span class="se">\r\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">status</span><span class="p">)</span>
+<span class="linenos" data-linenos="29 "></span>             <span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="n">response_headers</span><span class="p">:</span>
+<span class="linenos" data-linenos="30 "></span>                 <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="se">\r\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">header</span><span class="p">)</span>
+<span class="linenos" data-linenos="31 "></span>             <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="32 "></span>
+<span class="linenos" data-linenos="33 "></span>        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos" data-linenos="34 "></span>        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="linenos" data-linenos="35 "></span>
+<span class="linenos" data-linenos="36 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos" data-linenos="37 "></span>        <span class="k">if</span> <span class="n">exc_info</span><span class="p">:</span>
+<span class="linenos" data-linenos="38 "></span>            <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="39 "></span>                <span class="k">if</span> <span class="n">headers_sent</span><span class="p">:</span>
+<span class="linenos" data-linenos="40 "></span>                    <span class="c1"># 如果报头已发送，则重新抛出原始的异常。</span>
+<span class="linenos" data-linenos="41 "></span>                    <span class="k">raise</span> <span class="n">exc_info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">exc_info</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">exc_info</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos" data-linenos="42 "></span>            <span class="k">finally</span><span class="p">:</span>
+<span class="linenos" data-linenos="43 "></span>                <span class="n">exc_info</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 避免死循环。</span>
+<span class="linenos" data-linenos="44 "></span>        <span class="k">elif</span> <span class="n">headers_set</span><span class="p">:</span>
+<span class="linenos" data-linenos="45 "></span>            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;Headers already set!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="46 "></span>
+<span class="linenos" data-linenos="47 "></span>        <span class="n">headers_set</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">]</span>
+<span class="linenos" data-linenos="48 "></span>        <span class="k">return</span> <span class="n">write</span>
+<span class="linenos" data-linenos="49 "></span>
+<span class="linenos" data-linenos="50 "></span>    <span class="n">result</span> <span class="o">=</span> <span class="n">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+<span class="linenos" data-linenos="51 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="52 "></span>        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+<span class="linenos" data-linenos="53 "></span>            <span class="k">if</span> <span class="n">data</span><span class="p">:</span>   <span class="c1"># 在报文体出现前不发送报头。</span>
+<span class="linenos" data-linenos="54 "></span>                <span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="linenos" data-linenos="55 "></span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">headers_sent</span><span class="p">:</span>
+<span class="linenos" data-linenos="56 "></span>            <span class="n">write</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>  <span class="c1"># 如果报文体为空，则发送报头。</span>
+<span class="linenos" data-linenos="57 "></span>    <span class="k">finally</span><span class="p">:</span>
+<span class="linenos" data-linenos="58 "></span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="59 "></span>            <span class="n">result</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="中间件可扮演两端角色的组件-middleware-components-that-play-both-sides">中间件：可扮演两端角色的组件 (Middleware: Components that Play Both Sides)<a class="headerlink" href="#中间件可扮演两端角色的组件-middleware-components-that-play-both-sides" title="Permanent link">#</a></h3>
+<p>我们注意到，单个对象可以作为请求应用程序的服务器存在，也可以作为被服务器调用的应用程序存在。这样的“中间件”可以执行以下这些功能：</p>
+<ul>
+<li>在相应地重写<code>environ</code>变量之后，根据目标URL地址将请求路由到不同的应用程序对象。</li>
+<li>允许多个应用程序或框架在同一个进程中并行运行。</li>
+<li>通过在网络上转发请求和应答，实现负载均衡和远程处理。</li>
+<li>对内容（content）进行后加工（postprocessing），比如应用xsl样式表等。</li>
+</ul>
+<p>中间件的存在对于“服务器/网关”和“应用程序/框架”来说是透明的，并不需要特殊的支持。希望在应用程序中加入中间件的用户只须简单地把中间件当作应用程序提供给服务器，并配置中间件组件以服务器的身份来调用应用程序。当然，中间件组件包裹的“应用程序”也可能是另外一个包裹了应用程序的中间件组件，这样循环下去就构成了我们所说的“中间件栈”了。</p>
+<p>最重要的别忘了，中间件必须遵循WSGI的服务器和应用程序两端提出的一些限制和要求，甚至有些时候，对中间件的要求比对单纯的服务器或应用程序还要严格，关于这些我们都会在这份规范文档中指出来。</p>
+<p>这里有一个（有趣的）中间件组件的例子，这个中间件使用<em>Joe Strout</em>写的<code>piglatin.py</code>程序将<code>text/plain</code>的响应转换成<code>pig latin</code><strong>[译者注:意思是将英语词尾改成拉丁语式]</strong>。（注意：一个“真实”的中间件组件很可能会使用更加鲁棒的方式来检查内容<code>(content)</code>的类型和内容<code>(content)</code>的编码。同样，这个简单的例子还忽略了一个单词还可能跨区块分割的可能性）</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">piglatin</span><span class="w"> </span><span class="kn">import</span> <span class="n">piglatin</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">class</span><span class="w"> </span><span class="nc">LatinIter</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;将可迭代的输出转换成拉丁语式，如果可以转换的话。</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="sd">    注意“okayness”可能改变，直到应用程序生成(yield)出它自己的第一个非空字符串，</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="sd">    所以，‘transform_ok’必须是一个可变的真实值。</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">transform_ok</span><span class="p">):</span>
+<span class="linenos" data-linenos="12 "></span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="13 "></span>            <span class="bp">self</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">close</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">_next</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">next</span>
+<span class="linenos" data-linenos="15 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">transform_ok</span> <span class="o">=</span> <span class="n">transform_ok</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos" data-linenos="18 "></span>        <span class="k">return</span> <span class="bp">self</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span>    <span class="k">def</span><span class="w"> </span><span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos" data-linenos="21 "></span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_ok</span><span class="p">:</span>
+<span class="linenos" data-linenos="22 "></span>            <span class="k">return</span> <span class="n">piglatin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_next</span><span class="p">())</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="24 "></span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_next</span><span class="p">()</span>
+<span class="linenos" data-linenos="25 "></span>
+<span class="linenos" data-linenos="26 "></span><span class="k">class</span><span class="w"> </span><span class="nc">Latinator</span><span class="p">:</span>
+<span class="linenos" data-linenos="27 "></span>
+<span class="linenos" data-linenos="28 "></span>    <span class="c1"># 默认情况下不传送输出。</span>
+<span class="linenos" data-linenos="29 "></span>    <span class="n">transform</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos" data-linenos="30 "></span>
+<span class="linenos" data-linenos="31 "></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
+<span class="linenos" data-linenos="32 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">application</span>
+<span class="linenos" data-linenos="33 "></span>
+<span class="linenos" data-linenos="34 "></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+<span class="linenos" data-linenos="35 "></span>
+<span class="linenos" data-linenos="36 "></span>        <span class="n">transform_ok</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos="37 "></span>
+<span class="linenos" data-linenos="38 "></span>        <span class="k">def</span><span class="w"> </span><span class="nf">start_latin</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos" data-linenos="39 "></span>
+<span class="linenos" data-linenos="40 "></span>            <span class="c1"># 重置ok标志位，以防这是一个重复的调用。</span>
+<span class="linenos" data-linenos="41 "></span>            <span class="k">del</span> <span class="n">transform_ok</span><span class="p">[:]</span>
+<span class="linenos" data-linenos="42 "></span>
+<span class="linenos" data-linenos="43 "></span>            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">response_headers</span><span class="p">:</span>
+<span class="linenos" data-linenos="44 "></span>                <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;content-type&#39;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">:</span>
+<span class="linenos" data-linenos="45 "></span>                    <span class="n">transform_ok</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos" data-linenos="46 "></span>                    <span class="c1"># 若出现content-length，则需要strip，否则会出错。</span>
+<span class="linenos" data-linenos="47 "></span>                    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="linenos" data-linenos="48 "></span>                        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">response_headers</span>
+<span class="linenos" data-linenos="49 "></span>                            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;content-length&#39;</span>
+<span class="linenos" data-linenos="50 "></span>                    <span class="p">]</span>
+<span class="linenos" data-linenos="51 "></span>                    <span class="k">break</span>
+<span class="linenos" data-linenos="52 "></span>
+<span class="linenos" data-linenos="53 "></span>            <span class="n">write</span> <span class="o">=</span> <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">,</span> <span class="n">exc_info</span><span class="p">)</span>
+<span class="linenos" data-linenos="54 "></span>
+<span class="linenos" data-linenos="55 "></span>            <span class="k">if</span> <span class="n">transform_ok</span><span class="p">:</span>
+<span class="linenos" data-linenos="56 "></span>                <span class="k">def</span><span class="w"> </span><span class="nf">write_latin</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="linenos" data-linenos="57 "></span>                    <span class="n">write</span><span class="p">(</span><span class="n">piglatin</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="linenos" data-linenos="58 "></span>                <span class="k">return</span> <span class="n">write_latin</span>
+<span class="linenos" data-linenos="59 "></span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="60 "></span>                <span class="k">return</span> <span class="n">write</span>
+<span class="linenos" data-linenos="61 "></span>
+<span class="linenos" data-linenos="62 "></span>        <span class="k">return</span> <span class="n">LatinIter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_latin</span><span class="p">),</span> <span class="n">transform_ok</span><span class="p">)</span>
+<span class="linenos" data-linenos="63 "></span>
+<span class="linenos" data-linenos="64 "></span>
+<span class="linenos" data-linenos="65 "></span><span class="c1"># 在Latinator&#39;s控制下运行foo_app, 使用示例的CGI网关例子。</span>
+<span class="linenos" data-linenos="66 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">foo_app</span><span class="w"> </span><span class="kn">import</span> <span class="n">foo_app</span>
+<span class="linenos" data-linenos="67 "></span><span class="n">run_with_cgi</span><span class="p">(</span><span class="n">Latinator</span><span class="p">(</span><span class="n">foo_app</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="规范细则-specification-details">规范细则 (Specification Details)<a class="headerlink" href="#规范细则-specification-details" title="Permanent link">#</a></h2>
+<p>应用程序对象必须接受两个位置参数（positional arguments），为了方便说明，我们不妨将它们分别命名为<code>environ</code>和<code>start_response</code>，但是这并不是说它们必须取这两个名字。服务器或网关<strong>必须</strong>用这两个位置参数（注意不是关键字参数）来调用应用程序对象（比如，像上面展示的那样调用<code>result = application(environ,start_response)</code>）</p>
+<p><code>environ</code>参数是一个字典对象，也是一个有着CGI风格的环境变量。这个对象<strong>必须</strong>是一个Python内建的字典对象（<em>不</em>能是子类、用户字典<code>(UserDict)</code>或其他对字典对象的模仿），应用程序必须允许以任何它需要的方式来修改这个字典， <code>environ</code>还必须包含一些特定的WSGI所需的变量（在后面章节里会提到），有时也可以包含一些服务器相关的扩展变量，通过下文提到的命名规范来命名。</p>
+<p><code>start_response</code>参数是一个可调用对象<code>(callable)</code>，它接受两个必须的位置参数和一个可选参数。为方便说明，我们分别将它们命名为<code>status</code>，<code>response_headers</code>和<code>exc_info</code>。再强调一遍，这并不是说它们一定要用这些名字。应用程序<strong>必须</strong>用这些位置参数来调用<code>start_response</code>（比如像这样：<code>start_response(status,response_headers)</code>)。</p>
+<p><code>status</code>参数是形式如<code>"999 Message here"</code>的状态字符串。<code>response_headers</code>参数是包含<code>(header_name, header_value)</code>元组的列表，用来描述HTTP的响应头。可选的<code>exc_info</code>参数会在接下来的<a href="./#start_response函数-the-start_response-callable"><code>start_response()</code>函数</a>和<a href="./#错误处理-error-handling">错误处理</a>两节中详细描述，它只有在应用程序捕获到了错误并试图在浏览器中显示错误的时候才会被用到。</p>
+<p><code>start_response</code>必须返回一个形如<code>write(body_data)</code>的可调用对象<code>(callable)</code>，它接受一个位置参数：一个将会被当作HTTP响应体的一部分而输出的字符串（注意：提供<code>write()</code>只是为了支持一些现有框架的命令式输出APIs；新的应用程序或框架应当尽量避免使用<code>write()</code>，详细情况请参照<a href="./#缓冲和流-buffering-and-streaming">缓冲和流</a>章节。)</p>
+<p>当应用程序被服务器调用的时候，它必须返回一个能够生成0个或多个字符串的可迭代对象<code>(iterable)</code>。可以通过几种方式来实现，比如通过返回一个包含一系列字符串的列表，或者是让应用程序本身就是一个能生成多个字符串的生成器<code>(generator)</code>，又或者是使应用程序本身是一个类并且这个类的实例是一个可迭代对象<code>(iterable)</code>。总之，不论通过什么途径完成，应用程序对象必须总是能返回一个能够生成0个或多个字符串的可迭代对象<code>(iterable)</code>。</p>
+<p>服务器或者网关必须将产生的字符串以一种无缓冲的方式传送到客户端，并且总是在一个字符串传完之后再去请求下一个字符串。（换句话说，也就是应用程序<strong>应该</strong>自己负责实现缓冲机制。更多关于应用程序输出应该如何处理的细节，请阅读下文的<a href="./#缓冲和流-buffering-and-streaming">缓冲和流</a>章节。)</p>
+<p>服务器或网关应当将产生的字符串看做是一串<em>二进制字节序列</em>来对待：特别地，它必须确保行的结尾没有被修改。应用程序必须负责确保将那些要传送至HTTP客户端的字符串以一种与客户端相匹配的编码方式输出（服务器/网关<strong>可能</strong>会对HTTP附加传输编码，或者为了实现一些类似字节范围传输<code>(byte-range transmission)</code>这样的HTTP特性而进行一些转换，更多关于HTTP特性的细节请参照下文的<a href="./#http的其他特性-other-http-features">HTTP的其他特性</a>章节。)</p>
+<p>假如服务器成功调用了<code>len(iterable)</code>方法，则它会认为此结果是正确的并且信赖这个结果。也就是说，如果应用程序返回的可迭代对象<code>(iterable)</code>字符串提供了一个可用的<code>__len__()</code> 方法，那么服务器就会假定应用程序<strong>必然</strong>返回了正确的结果。（关于这个方法在一般情况下是如何被使用的，请阅读下文的<a href="./#处理content-length头-handling-the-content-length-header">处理Content-Length头</a>。)</p>
+<p>如果应用程序返回的可迭代对象<code>(iterable)</code>有一个叫做<code>close()</code>的方法，则不论当前的请求是正常结束还是由于异常而终止，服务器/网关都<strong>必须</strong>在结束该请求之前调用这个方法。（这么做的目的是为了支持应用程序端的资源释放，这份规范将尝试完善对<a href="https://www.python.org/dev/peps/pep-0325/">PEP 325</a>中生成器的支持，以及其它有<code>close()</code>方法的通用可迭代对象<code>(iterable)</code>的支持。</p>
+<p>（注意：应用程序<strong>必须</strong>在可迭代对象<code>(iterable)</code>产生第一个报文主体<code>(body)</code>字符串之前请求<code>start_response()</code>，这样服务器才能在发送任何报文主体<code>(body)</code>内容之前发送响应首部<code>(headers)</code>。不过，这一调用也<strong>可能</strong>在可迭代对象<code>(iterable)</code>第一次迭代的时候执行，所以服务器<strong>不能</strong>假定在它们开始迭代之前<code>start_response()</code>已经被调用过了。)</p>
+<p>最后要说的是，服务器和网关<strong>不能</strong>使用应用程序返回的可迭代对象<code>(iterable)</code>的任何其他属性，除非是针对服务器或网关的特定类型的实例，比如<code>wsgi.file_wrapper</code>返回的“file wrapper”（请阅读<a href="./#可选的平台相关文件处理-optional-platform-specific-file-handling">可选的平台相关文件处理</a>章节)。通常情况下，只有在这里指定的属性，或者通过<a href="https://www.python.org/dev/peps/pep-0234/">PEP 234 iteration APIs</a>访问的属性才是可以接受的。</p>
+<h3 id="environ变量-environ-variables"><code>environ</code>变量 (<code>environ</code> Variables)<a class="headerlink" href="#environ变量-environ-variables" title="Permanent link">#</a></h3>
+<p><code>environ</code>字典被用来包含这些CGI环境变量，这些变量定义可以在参考文献<em>Common Gateway Interface specification</em><a href="http://ken.coar.org/cgi/draft-coar-cgi-v11-03.txt" title="The Common Gateway Interface Specification, v 1.1, 3rd Draft">[2]</a>中找到。下面所列出的这些变量若不是空字符串，都<strong>必须</strong>被设置。否则（为空字符串），若无特殊说明，它们<strong>可以</strong>被忽略。</p>
+<hr />
+<p><strong>REQUEST_METHOD</strong><br />
+HTTP的请求方法，如<code>"GET"</code>或<code>"POST"</code>。这个参数永远不可能是空字符串，故必须被设置。</p>
+<hr />
+<p><strong>SCRIPT_NAME</strong><br />
+URL请求中“路径<code>(path)</code>”的开始部分，对应了应用程序对象，这样应用程序就知道它的虚拟位置。如果该应用程序对应服务器根目录的话， 那么<code>SCRIPT_NAME</code>的值可能为空字符串。</p>
+<hr />
+<p><strong>PATH_INFO</strong><br />
+URL请求中“路径<code>(path)</code>”的其余部分，指定请求的目标在应用程序内部的虚拟位置。如果请求的目标是应用程序根目录并且末尾没有<code>'/'</code>符号结尾的话，那么<code>PATH_INFO</code>可能为空字符串 。</p>
+<hr />
+<p><strong>QUERY_STRING</strong><br />
+URL请求中紧跟在<code>'?'</code>后面的那部分，它可以为空或不存在。</p>
+<hr />
+<p><strong>CONTENT_TYPE</strong><br />
+HTTP请求中<code>Content-Type</code>字段包含的所有内容，它可以为空或不存在。</p>
+<hr />
+<p><strong>CONTENT_LENGTH</strong><br />
+HTTP请求中<code>Content-Length</code>字段包含的所有内容，它可以为空或不存在。</p>
+<hr />
+<p><strong>SERVER_NAME</strong>，<strong>SERVER_PORT</strong><br />
+这两个变量可以和<code>SCRIPT_NAME</code>、<code>PATH_INFO</code>一起构成了一个完整的URL。然而要注意的是，如果有出现<code>HTTP_HOST</code>，那么在重建URL请求的时候就应当优先使用<code>HTTP_HOST</code>而非<code>SERVER_NAME</code>。详细内容请阅读下文的<a href="./#url的重建-url-reconstruction">URL的重建</a>章节 。<code>SERVER_NAME</code>和<code>SERVER_PORT</code>这两个变量永远不可能是空字符串，故它们必须被设置。</p>
+<hr />
+<p><strong>SERVER_PROTOCOL</strong><br />
+客户端发送请求的时候所使用的协议版本。通常是类似<code>"HTTP/1.0"</code>或<code>"HTTP/1.1"</code>这样的字符串，可以被应用程序用来判断如何处理HTTP请求报头。（事实上这个变量更应该被叫做<code>REQUEST_PROTOCOL</code>，因为这个变量代表的是在请求中使用的协议，而且和服务器响应时使用的协议毫无关系。但为了保持和CGI的兼容性，这里我们还是沿用已有的名字<code>SERVER_PROTOCOL</code>）</p>
+<hr />
+<p><strong>HTTP_变量组</strong><br />
+这组变量对应着客户端提供的HTTP请求首部<code>(headers)</code>（即那些名字以<code>"HTTP_"</code>开头的变量）。这组变量的存在与否应和HTTP请求中相对应的HTTP首部字段保持一致。</p>
+<hr />
+<p>一个服务器或网关<strong>应该</strong>尽可能多地提供其他可用的CGI变量。另外，如果启用了SSL，服务器或网关也<strong>应该</strong>尽可能地提供可用的Apache SSL环境变量<a href="http://www.modssl.org/docs/2.8/ssl_reference.html#ToC25" title="mod_ssl Reference, &quot;Environment Variables&quot;">[5]</a>，比如<code>HTTPS=on</code>和<code>SSL_PROTOCOL</code>。不过要注意的是，假如一个应用程序使用了些上述没有列出的变量，那么对于那些不支持相关扩展的服务器来说，就必然要考虑到不可移植的缺点（比如，不发布文件的web服务器就没法提供一个有意义的<code>DOCUMENT_ROOT</code>和<code>PATH_TRANSLATED</code>变量）。</p>
+<p>一个遵循WSGI规范的服务器或网关<strong>应该</strong>在文档中描述它们自己的定义的同时，适当地说明下它们可以提供哪些变量。而应用程序这边则<strong>应该</strong>对它们要用到的每一个变量的存在性进行检查，并且在当检测到某些变量不存在时要有备用的措施。</p>
+<p>注意: 缺失的变量（比如当没有发生身份验证时的<code>REMOTE_USER</code>变量）应该被排除在<code>environ</code>字典之外。同样需要注意的是，CGI定义的变量，如果有出现的话，那必须是字符串类型。使用任何除了字符串类型以外的CGI变量都是违反本规范的。</p>
+<p>除了CGI定义的变量，<code>environ</code>字典也<strong>可以</strong>包含任何操作系统相关的环境变量，并且<strong>必须</strong>包含下面这些WSGI定义的变量：</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>变量值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wsgi.version</code></td>
+<td>元组<code>(tuple)</code> <code>(1, 0)</code>，代表WSGI版本 1.0。</td>
+</tr>
+<tr>
+<td><code>wsgi.url_scheme</code></td>
+<td>应用程序被调用过程中的一个字符串，表示URL中的<code>"scheme"</code>部分。正常情况下，它的值是<code>"http"</code>或者<code>"https"</code>，视场合而定。</td>
+</tr>
+<tr>
+<td><code>wsgi.input</code></td>
+<td>能读取到HTTP请求主体<code>(body)</code>的输入流（类文件对象)。（服务器或网关可以根据应用程序的请求按需读取；也可以预读取客户端的请求主体然后缓存在内存或者磁盘中；又或者根据它们自己的参数利用其他技术来提供这样一种输入流。)</td>
+</tr>
+<tr>
+<td><code>wsgi.errors</code></td>
+<td>用来写错误信息的输出流（类文件对象），以标准化的方式（集中）记录程序的出错信息。它应该是一个“文本模式”的流；举一个例子，应用程序应该用<code>'\n'</code>作为行结束符，并且默认服务器/网关能将它转换成正确的行结束符。  对很多服务器来说，<code>wsgi.errors</code>是服务器的主要错误日志。当然也有其它选择，比如<code>sys.stderr</code>，或者干脆是某种形式的日志文件。服务器的文档应当包含以下这类解释：比如该如何配置这些日志，又或者该从哪里去查找这些记录下来的输出。如果需要，一个服务器或网关还可以向不同的应用程序提供不同的错误流。</td>
+</tr>
+<tr>
+<td><code>wsgi.multithread</code></td>
+<td>如果一个应用程序对象同时被处于同一个进程中的不同线程调用，则这个参数值应该为<code>true</code>，否则就为<code>false</code>。</td>
+</tr>
+<tr>
+<td><code>wsgi.multiprocess</code></td>
+<td>如果相同的应用程序对象同时被其他进程调用，则此参数值应该为<code>true</code>；否则就为<code>false</code>。</td>
+</tr>
+<tr>
+<td><code>wsgi.run_once</code></td>
+<td>如果服务器/网关期待（但不保证）应用程序在它所在的进程生命期间只会被调用一次，则这个值应该为<code>true</code>。正常情况下，对于那些基于CGI（或类似）的网关，这个值只可能是<code>true</code>。</td>
+</tr>
+</tbody>
+</table>
+<p>最后想说的是，这个<code>environ</code>字典有可能会包含那些服务器定义的变量。这些变量应该用小写字母，数字，英文句号及下划线来命名，并且应该定义一个服务器/网关专有的前缀开头。举个例子，<code>mod_python</code>在定义变量的时候，就会使用类似<code>mod_python.some_variable</code>这样的名字。</p>
+<h4 id="输入流和错误流-input-and-error-streams">输入流和错误流 (Input and Error Streams)<a class="headerlink" href="#输入流和错误流-input-and-error-streams" title="Permanent link">#</a></h4>
+<p>服务器提供的输入输出流必须提供以下的方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法(Method)</th>
+<th>流(Stream)</th>
+<th>注释(Notes)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>read(size)</code></td>
+<td>input</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>readline()</code></td>
+<td>input</td>
+<td>1, 2</td>
+</tr>
+<tr>
+<td><code>readlines(hint)</code></td>
+<td>input</td>
+<td>1, 3</td>
+</tr>
+<tr>
+<td><code>__iter__()</code></td>
+<td>input</td>
+<td></td>
+</tr>
+<tr>
+<td><code>flush()</code></td>
+<td>errors</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>write(str)</code></td>
+<td>errors</td>
+<td></td>
+</tr>
+<tr>
+<td><code>writelines(seq)</code></td>
+<td>errors</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>除了如下提及的注意事项，以上所有方法的语义在Python Library Reference里已经写得很具体了。</p>
+<ol>
+<li>服务器不要读取超过客户端指定的<code>Content-length</code>长度的数据，如果应用程序试图读取超出这个长度范围的数据，服务器可以返回一个文件结束符<code>(end-of-file)</code>。应用程序<strong>不应该</strong>读取超出<code>CONTENT_LENGTH</code>变量指定的长度范围的数据。</li>
+<li><code>readline()</code>方法不支持可选的<code>size</code>参数，因为它会给服务器作者带来额外的复杂性，而且在实际中它不并常用。</li>
+<li>请注意，<code>readlines()</code>方法中的<code>hint</code>参数对于它的调用者和实现者都是可选的。应用程序可以不提供它，服务器或网关这端也可以忽略它。</li>
+<li>由于错误流不能回转<code>(rewound)</code>，服务器和网关可以直接转发<code>(forward)</code>写操作，而不需要进行缓存。在这种情况下，<code>flush()</code>方法可能就是个空操作<code>(no-op)</code>。不过，具备良好可移植性的应用程序不能假定这个输出流是无缓冲的，也不能假定<code>flush()</code>是一个空操作。应用程序必须通过调用<code>flush()</code>方法来确保输出写入完成（例如：在多进程下对同一个日志文件的写入操作，主动调用<code>flush()</code>可以起到数据混杂最小化的作用）。</li>
+</ol>
+<p>所有遵循此规范的服务器都<strong>必须</strong>支持上表中所列出的每一个方法。所有遵循此规范的应用程序都<strong>不能</strong>在输入流和错误流对象上使用除上表之外的其他方法或属性。另外，应用程序也<strong>不能</strong>调用存在的<code>close()</code>方法来关闭这些流。</p>
+<h3 id="start_response函数-the-start_response-callable"><code>start_response()</code>函数 (The <code>start_response()</code> Callable)<a class="headerlink" href="#start_response函数-the-start_response-callable" title="Permanent link">#</a></h3>
+<p>传递给应用程序的第二个参数是形如<code>start_response(status, reponse_headers, exc_info=None)</code>的可调用对象。（同所有的WSGI可调用对象类似，它的参数必须是位置参数，而非关键字参数）。<code>start_response</code>被用来启动一个HTTP响应，它必须返回一个形如<code>write(body_data)</code>的可调用对象（具体参考下文的<a href="./#缓冲和流-buffering-and-streaming">缓冲和流</a>章节）</p>
+<p><code>status</code>参数是HTTP的<code>"状态字符串(status)"</code>，例如：<code>"200 OK"</code>, <code>"404 Not Found"</code>。它包含一个状态码和一个原因短语，状态码在前，原因短语在后，中间用空格分隔，两端不包含任何其他的字符或空格（详情请参见<a href="http://tools.ietf.org/html/rfc2616.html">RFC2616</a>的6.1.1节）。<code>status</code>字符串<strong>不能</strong>包含控制字符，末尾也不能有回车换行等其他的组合符号。</p>
+<p><code>response_headers</code>参数是<code>(header_name, header_value)</code>元组的列表，它必须是一个严格的Python列表类型，既<code>type(response_headers) is ListType</code>。如有需要，服务器<strong>可以</strong>随意修改它的内容。每一个<code>header_name</code>都必须是合法的HTTP首部<code>(header)</code>字段名（在<a href="http://www.faqs.org/rfcs/rfc2616.html">RFC2616</a>的4.2节中定义），末尾不能有冒号或其他标点符号。</p>
+<p>所有的<code>header_value</code>中都<strong>不能</strong>含有包括回车换行在内的任何控制字符，无论是在中间嵌入还是在末尾追加（做这样的要求是为了方便那些必须检查响应头的服务器、网关和中间件，使它们将必需的解析工作复杂度降到最低）。</p>
+<p>一般来说，服务器或网关负责确保将正确的HTTP首部<code>(headers)</code>发送到客户端，如果应用程序<code>(application)</code>遗漏了必要的HTTP首部字段（或其他同等的相关规范结构），则服务器或网关<strong>必须</strong>补全。 比如<code>HTTP Date:</code>头和<code>Server:</code>头，它们通常是由服务器或网关提供的。</p>
+<p>（这里必须给服务器/网关的作者们提个醒: HTTP首部字段<code>(header)</code>的名称不区分大小写，因此在检查应用程序提供的首部字段时请务必考虑到这一点！）</p>
+<p>应用程序和中间件禁止使用HTTP/1.1的<code>"逐跳路由(hop-by-hop)"</code>特性和相应的首部字段<code>(headers)</code>，也不能使用HTTP/1.0中的等价特性，和那些可能会对客户端与服务器之间的长连接产生影响的首部字段<code>(headers)</code>。这类特性是Web服务器的专属领域，如果一个应用程序尝试发送这类特性，那么服务器或网关<strong>必须</strong>将其看作是一个致命错误，并且从被供给的<code>start_response()</code>中抛出异常。（关于<code>"逐跳路由(hop-by-hop)</code>特性和首部字段的具体信息，请参阅<a href="./#http的其他特性-other-http-features">HTTP的其他特性</a>章节。)</p>
+<p><code>start_response</code>可调用对象<strong>不能</strong>直接发送响应首部。相反地，服务器或网关必须储存它们，并<strong>只有</strong>在对应用程序所返回对象的首次产生非空字符串的迭代过程后，或是应用程序调用<code>write()</code>后，才能发送它们。换句话说，响应首部<code>(headers)</code>要在响应主体<code>(body)</code>真正可用后，或是应用程序返回的对象结束迭代后，才能被发送（唯一可能的例外是，响应首部<code>(headers)</code>里带有值为0的<code>Content-Length</code>字段）。</p>
+<p>响应首部的延迟发送，是为了确保带缓存或异步过程的应用程序，直到最后一刻都能够利用出错信息替换掉它们一开始打算的输出。举个例子，如果应用程序利用缓存生成响应主体的过程出错了，应用程序就需要把原来的<code>"200 OK"</code>响应状态字符串<code>(status)</code>替换成<code>"500 Internal Error"</code>。</p>
+<p>如果有提供<code>exc_info</code>参数，则它必须是一个Python的<code>sys.exc_info()</code>元组<code>(tuple)</code>。该参数只有在<code>start_response</code>被一个错误处理程序<code>(error handler)</code>调用时才需要被提供。如果提供了<code>exc_info</code>参数，并且还没有任何HTTP首部被发送，那么<code>start_response</code>应当使用新提供的HTTP首部去替换掉当前已存储的HTTP响应首部，从而允许应用程序在错误发生的情况下可以针对输出“改变主意”。</p>
+<p>然而，假如提供<code>exc_info</code>参数时HTTP首部已经被发送，那么<code>start_response</code><strong>必须</strong>抛出错误，而且这个错误<strong>应该</strong>是<code>exc_info</code>元组。即：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">raise</span> <span class="n">exc_info</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">exc_info</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">exc_info</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<p>这样会使应用程序重新捕获该异常，并且原则上应该也会终止应用程序（一旦HTTP首部被发送，应用程序再尝试向浏览器发送错误信息就是不安全的了）。如果应用程序调用<code>start_response</code>时传递了<code>exc_info</code>参数，那么它<strong>一定不能</strong>捕获任何由<code>start_response</code>抛出的异常。相反，应用程序应该允许这些异常传播回服务器或者网关。更多信息请参考下文的<a href="./#错误处理-error-handling">错误处理</a>章节。</p>
+<p>应用程序<strong>可能</strong>多次调用<code>start_response</code>，当且仅当后续的调用提供<code>exc_info</code>参数时。更确切的说，如果<code>start_response</code>已经被当前应用程序调用过了，那么在没有提供<code>exc_info</code>参数的情况下再次调用<code>start_response</code>就是一个严重错误。（请参考上面CGI网关示例来帮助理解准确的逻辑）</p>
+<p>注意：实现了<code>start_response</code>的服务器、网关和中间件<strong>应该</strong>确保除了在函数调用期间，不持有任何对<code>exc_info</code>参数的引用，这样能避免栈帧回溯过程<code>(traceback and frames involved)</code>产生循环引用<code>(circular reference)</code>。最简单的例子如下：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">def</span><span class="w"> </span><span class="nf">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos" data-linenos="2 "></span>    <span class="k">if</span> <span class="n">exc_info</span><span class="p">:</span>
+<span class="linenos" data-linenos="3 "></span>         <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="4 "></span>             <span class="c1"># 这里处理 w/exc_info</span>
+<span class="linenos" data-linenos="5 "></span>         <span class="k">finally</span><span class="p">:</span>
+<span class="linenos" data-linenos="6 "></span>             <span class="n">exc_info</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 避免循环引用。</span>
+</code></pre></div>
+<h3 id="处理content-length首部-handling-the-content-length-header">处理<code>Content-Length</code>首部 (Handling the <code>Content-Length</code> Header)<a class="headerlink" href="#处理content-length首部-handling-the-content-length-header" title="Permanent link">#</a></h3>
+<p>如果应用程序没有提供<code>Content-Length</code>首部，则服务器或网关可以有几种方法来处理它，这些方法当中最简单的就是在响应完成的时候关闭客户端连接。</p>
+<p>在某些情况下，服务器或网关能够生成<code>Content-Length</code>首部，或至少避免关闭客户端连接。如果应用程序<em>没有</em>调用<code>write()</code>，且返回的可迭代对象的长度是1<code>(len() is 1)</code>，则服务器可以通过可迭代对象生成的第一个字符串的长度来确定<code>Content-Length</code>的值。</p>
+<p>另外，如果服务器和客户端都支持HTTP/1.1中的<code>"分块传输编码(chunked encoding)"</code><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1" title="&quot;Chunked Transfer Coding&quot; -- HTTP/1.1, section 3.6.1">[3]</a>特性，那么服务器<strong>可以</strong>利用<code>chunked编码</code>在每一次调用<code>write()</code>方法或迭代生成字符串时后发送一个数据块<code>(chunk)</code>，并为每一个数据块生成一个<code>Content-Length</code>。这样就可以让服务器保持与客户端的长连接。注意，如果真要这么做，服务器<strong>必须</strong>完全遵循<a href="http://tools.ietf.org/html/rfc2616.html">RFC2616</a>规范，否则就应另寻它法。</p>
+<p>（注意：应用程序和中间件的输出<strong>一定不能</strong>使用任何类型的传输编码<code>(Transfer-Encoding)</code>技术，如<code>chunking</code>和<code>gzipping</code>，或是<code>"逐跳路由(hop-by-hop)"</code>。因为应用传输编码是服务器和网关的职责。详细信息可以参见下文的<a href="./#http的其他特性-other-http-features">HTTP的其他特性</a>章节）</p>
+<h3 id="缓冲和流-buffering-and-streaming">缓冲和流 (Buffering and Streaming)<a class="headerlink" href="#缓冲和流-buffering-and-streaming" title="Permanent link">#</a></h3>
+<p>一般而言，应用程序都会选择先缓存（适当大小的）输出再一次性发送的方式来提高吞吐量。这是一种十分常见的做法，Zope等框架都是如此：输出会先被缓存到<code>StringIO</code>或类似的对象里面，然后连同响应首部一次性发送出去。  </p>
+<p>WSGI中相对应的处理方法是让应用程序简单地返回一个只包含一个元素的可迭代对象<code>(single-element iterable)</code>，比如列表<code>(list)</code>，它的唯一元素是响应主体<code>(response body)</code>的字符串形式。这是一种对于绝大多数应用程序都推荐的工作方式，因为将渲染出来的HTML页面保存到内存中十分容易。</p>
+<p>然而，对于大文件或HTTP流服务（比如多部分对象集合<code>(multipart)</code>中的<code>"服务器推送(server push)"</code>，应用程序往往需要将输出切分为多个较小的块（这样做能够避免将整个大文件加载进内存）。另一种情况是，响应的某些部分的生成过程耗时很长，这时能提前发送该响应体中那些已经生成好的内容就很有必要。</p>
+<p>在这些情况下，应用程序一般会返回一个可迭代者（通常是迭代器形式的生成器<code>(generator-iterator)</code>），然后逐块<code>(block-by-block)</code>地生成最终结果。由于（对于做服务器推送）要插入多部分对象边界<code>(multipart boundaries)</code>，或仅仅是做一些耗时长的任务（比如读硬盘上的另一个数据块），这些数据分块的生成可能是间断进行的。</p>
+<p>WSGI服务器、网关和中间件<strong>不允许</strong>延迟发送任何数据块，它们<strong>必须</strong>将数据块完整地发送给客户端，或者保证应用程序正在生成下一个数据块的同时它们将继续发送。服务器、网关和中间件可以用下列三种方案中的任意一种来提供该担保：</p>
+<ol>
+<li>交还控制权给应用程序前，将整个数据块发送给操作系统（并刷新<code>(flushed)</code>O/S缓冲区）；</li>
+<li>在应用程序生成下一个块的过程中，使用另一个线程来确保当前数据块能被继续发送；</li>
+<li>（仅适用于中间件）发送整个数据块到上级服务器或网关。</li>
+</ol>
+<p>通过提供这样的保证措施，WSGI就能给应用程序提供这样的抽像：输出数据的过程不会在任意点上陷入停滞。这对于确保诸如多部分对象集合<code>(multipart)</code>中的<code>"服务器推送(server push)"</code>流服务的正常工作是至关重要的，因为多部分对象边界<code>(multipart boundaries)</code>间的数据应当被完整地传送至客户端。</p>
+<h4 id="中间件的块边界处理-middleware-handling-of-block-boundaries">中间件的块边界处理 (Middleware Handling of Block Boundaries)<a class="headerlink" href="#中间件的块边界处理-middleware-handling-of-block-boundaries" title="Permanent link">#</a></h4>
+<p>为了更好地支持异步应用程序和服务器，中间件组件<strong>一定不能</strong>阻塞迭代过程以等待从应用程序的可迭代对象<code>(iterable)</code>中返回多个值。如果中间件需要从应用程序中累积更多的数据才能够生成一个输出，那么它<strong>必须</strong>生成<code>(yield)</code>一个空字符串。</p>
+<p>让我们换一种方式来表述这项要求，每一次当下层的应用程序生成了一个值，中间件组件都必须生成<strong>至少一个</strong>值。如果中间件什么值都生成不了，那么它也<strong>必须</strong>生成一个空字符串。</p>
+<p>这项要求确保了异步的服务器和应用程序能共同合作，减少同时运行给定数量的应用程序实例所需的线程数。</p>
+<p>需要注意的是，这样的要求也意味着一旦下层的应用程序返回了一个可迭代对象<code>(iterable)</code>，中间件就<strong>必须</strong>尽快地返回一个可迭代对象<code>(iterable)</code>。另外，中间件也不被允许利用<code>write()</code>来传输由下层应用程序生成的数据。中间件仅可以使用它上级服务器的<code>write()</code>来发送由下层应用程序使用其提供的<code>write()</code>发送来的数据。</p>
+<h4 id="write函数-the-write-callable"><code>write()</code>函数 (The <code>write()</code> Callable)<a class="headerlink" href="#write函数-the-write-callable" title="Permanent link">#</a></h4>
+<p>一些现有框架的APIs与WSGI的一个不同处理方式是它们支持无缓存的输出，特别需要指出的是，它们提供一个<code>write</code>函数或方法来写一个无缓冲的块或数据，或者它们提供一个缓冲的<code>write</code>函数和一个“刷新（flush）”机制来刷新缓冲。  </p>
+<p>不幸的是，就WSGI这样“可迭代”的应用程序返回值来说，除非使用多线程或其他的机制，否则这样的APIs并没有办法实现。</p>
+<p>因此为了允许这些框架继续使用这些必要的APIs，WSGI中包含了一个特殊的<code>write()</code>调用，它由<code>start_response</code>可调用者返回。</p>
+<p>如果有办法避免的话，新的WSGI应用程序和框架不应该使用<code>write()</code>调用。严格说来，这个<code>write()</code>调用是用来支持必要的流APIs的。一般来说，应用程序应该通过返回的可迭代对象<code>(iterable)</code>来生成输出，因为这样可以使得web服务器在同一个Python线程中不同任务之间的交织变得可能，整体上来讲是为服务器提供了更好的吞吐量。</p>
+<p>这个<code>write()</code>调用是由<code>start_response</code>可调用者返回的，它接受一个唯一的参数：一个将作为部分HTTP响应体而被写入的字符串，它被看作是已经被迭代生成后的结果。换句话说，在<code>writer()</code>返回前，它必须保证传入的字符串要么已经完全发送给客户端，要么已经在应用程序继续处理的过程当中被缓存用做传输了。  </p>
+<p>一个应用程序必须返回一个可迭代者对象，即使它使用<code>write()</code>来生成全部或部分响应体。返回的可迭代者可以是空的（例如生成一个空字符串），但是，假如它不生成空字符串，那么它的输出就就必须被服务器或者网关正常处理（比如说，它必须立即被发送或者是立即加入到队列当中）。应用程序不能在它们返回的可迭代者内调用<code>write()</code>。这样的话，任意一个由可迭代者生成的字符串均会在所有传递给<code>write()</code>的字符串都被传送至客户端之后被传送。</p>
+<h3 id="unicode问题-unicode-issues">Unicode问题 (Unicode Issues)<a class="headerlink" href="#unicode问题-unicode-issues" title="Permanent link">#</a></h3>
+<p>HTTP协议不提供对Unicode的直接支持，与此相同，本文档定义的接口也不提供对Unicode的支持。所有的编解码工作都必须在应用程序端来处理，所有传给服务器或从服务器传出的字符串必须是Python的标准字节字符串，而不能是Unicode对象。在要求使用字符串对象的地方使用Unicode对象，将会产生不可预料的结果。</p>
+<p>也要注意，作为状态字符串或响应首部传给<code>start_response()</code>方法的字符串在编码方面都必须遵循<a href="http://tools.ietf.org/html/rfc2616.html">RFC2616</a>规范。也就是说，它们必须使用ISO-8859-1字符集，或者使用<a href="http://tools.ietf.org/html/rfc2047.html">RFC2047</a>MIME编码。</p>
+<p>有些Python平台的<code>str</code>或者<code>StringType</code>类型实际上是基于Unicode的（如jython，ironPython，python 3000等），在其上实现本规范时，所有的“字符串”必须只包含以ISO-8859-1编码（从<code>\u0000</code>到<code>\u00FF</code>）表示的代码点<code>(code points)</code>。如果应用程序提供的字符串包含任何其它的 Unicode字符或代码点，将引发生严重错误。同样地，服务器和网关也<strong>不允许</strong>向应用程序提供任何Unicode字符。</p>
+<p>再次声明，本规范中提到的所有的字符串都<strong>必须</strong>是<code>str</code>或<code>StringType</code>类型，不能是<code>unicode</code>或<code>UnicodeType</code>类型。并且，针对本规范中所提到的作为<code>"字符串(string)"</code>的值，即便是一些平台的<code>str/StringType</code>对象支持超过8位<code>(bits)</code>的字符，也仅有低8位<code>(bits)</code>会被用到。</p>
+<h3 id="错误处理-error-handling">错误处理 (Error Handling)<a class="headerlink" href="#错误处理-error-handling" title="Permanent link">#</a></h3>
+<p>一般来说，应用程序<strong>应该</strong>负责捕获其的内部产生的错误，并且负责向浏览器输出有用的信息（由应用程序自己来决定哪些是“有用”的信息）。</p>
+<p>然而，要显示这样的一条信息，并不是说应用程序真的向浏览器发送了数据，而且真这样做的话有损坏响应的风险。因此，WSGI提供了一种机制，允许应用程序发送它自己的错误信息，或是自动地终止应用程序：通过传递<code>exc_info</code>参数给<code>start_response</code>。这里有个如何使用它的例子：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 2 "></span>    <span class="c1"># 这里是常规的应用程序代码</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;200 Froody&quot;</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">)]</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;正常的程序体（normal body）放这里&quot;</span><span class="p">]</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="k">except</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="c1"># 在这个简陋的‘except:’之前，XXX应该在一个单独的handler里捕捉运行时异常，</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="c1"># 譬如 MemoryError，KeyboardInterrupt 这些...</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;500 Oops&quot;</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">)]</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">())</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;这里放程序的错误主体(error body)&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>当有异常发生时，如果输出还没有被写入，则对<code>start_response</code>的调用将正常返回，然后应用程序会返回一个错误信息主体发送至浏览器。然而如果有部分输出已经被发送到浏览器了，那么<code>start_response</code>将会重新抛出预备好的异常。这个异常不应当会被应用程序捕获，因此应用程序会异常终止。服务器和网关会捕获这个（严重）异常并终止响应。  </p>
+<p>服务器应当捕获任何使应用程序和其迭代返回过程终止的异常，并记录日志。如果应用程序出错的时候已经有一部分响应被发送给浏览器了，则服务器和网关<strong>可以</strong>尝试添加一个错误消息给到输出，当然，前提是已经发送的首部里有一个标明内容类型为<code>text/*</code>字段，让服务器就知道如何正确地做出修改。</p>
+<p>一些中间件可能想提供额外的异常处理服务，或者拦截并替换应用程序的出错信息。在这种情况下，中间件可以选择抛出一个替换过的异常而<strong>不是</strong>重新抛出传递给<code>start_response</code>的<code>exc_info</code>，或者也可以在存储了所提供的参数之后简单地返回而不包含任何异常。这将会让应用程序返回错误主体的可迭代对象<code>(iterable)</code>（或调用<code>write()</code>），然后让中间件来捕获并修改错误输出。以上这些只有在应用程序的开发者们做到下面这些时才能发挥作用：  </p>
+<ol>
+<li>使用<code>exc_info</code>发起错误响应；  </li>
+<li>当传递<code>exc_info</code>参数时，不捕获由<code>start_response</code>产生的异常。</li>
+</ol>
+<h3 id="http-11-expectcontinue-机制-http-11-expectcontinue">HTTP 1.1 Expect/Continue 机制 (HTTP 1.1 Expect/Continue)<a class="headerlink" href="#http-11-expectcontinue-机制-http-11-expectcontinue" title="Permanent link">#</a></h3>
+<p>那些实现了HTTP1.1的服务器或网关，必须提供对HTTP1.1中<code>"Expect/Continue"</code>机制的透明支持，这可以通过以下几种方式来实现：</p>
+<ol>
+<li>对含有<code>Expect: 100-continue</code>的的请求直接返回<code>"100 Continue"</code>响应，然后正常处理。</li>
+<li>正常处理请求，但是提供给应用程序一个特殊的<code>wsgi.input</code>流，当/如果应用程序第一次尝试从输入流中读取的时候，就发送一个<code>"100 Continue"</code>响应。这个读取请求必须一直阻塞，直到客户端响应请求。  </li>
+<li>一直等待，直到客户端确认服务器不支持<code>expect/continue</code>特性，然后客户端自己发来请求体。（这个方法较差，不推荐）</li>
+</ol>
+<p>注意，以上这些行为的限制不适用于HTTP 1.0请求，也不适用于那些往应用程序对象发送的请求。更多关于HTTP 1.1 Except/Continue的信息，请参阅<a href="http://tools.ietf.org/html/rfc2616.html">RFC2616</a>的8.2.3节和10.1.1节。</p>
+<h3 id="http的其他特性-other-http-features">HTTP的其他特性 (Other HTTP Features)<a class="headerlink" href="#http的其他特性-other-http-features" title="Permanent link">#</a></h3>
+<p>通常来说，服务器和网关应当“尽少干涉”，应当让应用程序对它们自己的输出有100%的控制权。服务器/网关只做一些小的改动并且这些小改动不会影响到应用程序响应的语义（semantics ）。应用程序的开发者总是有可能通过添加中间件来额外提供一些特性的，所以服务器/网关的开发者在实现服务器/网关的时候可以适当偏保守些。在某种意义上说，一个服务器应当将自己看作是一个HTTP“网关服务器（gateway server）”，应用程序则应当将自己看作是一个HTTP “源服务器（origin server）”（关于这些术语的定义，请参照 <a href="http://www.faqs.org/rfcs/rfc2616.html">RFC2616</a> 的1.3章节）</p>
+<p>然而，由于WSGI服务器和应用程序并不是通过HTTP通信的，<a href="http://www.faqs.org/rfcs/rfc2616.html">RFC2616</a> 中提到的“逐跳路由（hop-by-hop）”并没有应用到WSGI内部通信中。因此，WSGI应用程序一定不能生成任何"逐跳路由（hop-by-hop）"头信息<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.5.1" title="&quot;End-to-end and Hop-by-hop Headers&quot; -- HTTP/1.1, Section 13.5.1">[4]</a>，试图使用HTTP中要求它们生成这样的报头的特性，或者依赖任何传入的"逐跳路由（hop-by-hop）"<code>environ</code>字典中报头。WSGI服务器必须自己处理所有已经支持的"逐跳路由（hop-by-hop）"头信息，比如为每一个到达的信息做传输解码，解码也要包括那些分块编码（chunked-encoding）的，如果有的话。</p>
+<p>如果将这些原则应用到各种各样的HTTP特性中去，应该很容易得知：服务器可以通过<code>If-None-Match</code>及<code>If-Modified-Since</code>请求头，<code>Last-Modified</code>及<code>ETag</code>响应头等方式来处理缓存验证。然而，这并不是必须的，如果应用程序自身支持的话，则应用程序应当自己负责处理缓存验证，因为服务器/网关就没有说必须要做这样的验证。</p>
+<p>同样地，服务器可能会对一个应用程序的响应做重编码或传输编码，不过，应用程序应当对自己发送的内容做适当的编码并且不能做传输编码。如果客户端请求需要，则服务器可能以字节范围（byte ranges）的方式传送应用程序的响应，应用程序并没有对字节范围（byte ranges）提供原生支持。再次申明，如果有需要，应用程序则应当自己执行此功能。</p>
+<p>注意，这些对应用程序的限制不是说要求每一个应用程序都重新实现一次所有的HTTP特性；中间件可以实现许多HTTP特性的全部或者一部分，这样便可以让服务器和应用程序作者从一遍又一遍实现这些特性的痛苦中解放出来。</p>
+<h3 id="线程支持-thread-support">线程支持 (Thread Support)<a class="headerlink" href="#线程支持-thread-support" title="Permanent link">#</a></h3>
+<p>线程的支持取决于服务器。服务器虽然可以同时并行处理多个请求，但也<strong>应当</strong>提供额外的选择让应用程序可以以单线程的方式运行，这样一来，一些不是线程安全的应用程序或框架也可以在这些服务器上运行。</p>
+<h2 id="具体实现应用程序备注-implementationapplication-notes">具体实现/应用程序备注 (Implementation/Application Notes)<a class="headerlink" href="#具体实现应用程序备注-implementationapplication-notes" title="Permanent link">#</a></h2>
+<h3 id="服务器扩展apis-server-extension-apis">服务器扩展APIs (Server Extension APIs)<a class="headerlink" href="#服务器扩展apis-server-extension-apis" title="Permanent link">#</a></h3>
+<p>一些服务器的作者可能希望暴露更多高级的API，让应用程序和框架的作者能用来做更特别的功能。例如，一个基于<code>mod_python</code>的网关可能就希望暴露部分Apache API作为WSGI的扩展。</p>
+<p>在最简单的情况下，这只需要定义一个<code>environ</code>变量，其它的什么都不需要了，比如<code>mod_python.some_api</code>。但是，更多情况下，那些可能出现的中间件会就使情况变得复杂的多。比如，一个API，它提供了访问<code>environ</code>变量中出现的同一个HTTP报头的功能，如果<code>environ</code>变量被中间件修改，则它很可能会返回不一样的值。</p>
+<p>通常情况下，任何重复、取代或者绕过部分WSGI功能的扩展API都会有与中间件组件不兼容的风险。服务器/网关开发者不能寄希望于没人使用中间件，因为有一些框架的作者们明确打算（重新）组织他们的框架，使之几乎完全就像各种中间件一样工作。</p>
+<p>所以，为了提供最大的兼容性，提供了扩展API来取代部分WSGI功能的服务器/网关，必须设计这些API以便它们被部分替换过的API调用。例如:一个允许访问HTTP请求头的扩展API需必须要求应用程序传输当前的<code>environ</code>，以便服务器/网关可以验证那些能被API访问的HTTP头，验证它们没有被中间件修改过。如果该扩展的API不能保证它总是就HTTP报头内容同<code>environ</code>达成协议，它就必须拒绝向应用程序提供服务。例如，通过抛出一个错误，返回None来代替头信息集合，或者其它任何适合该API的东西。</p>
+<p>同样地，如果扩展的API额外提供了一种方法来写响应数据或头信息，它应当要求<code>start_response</code> 这个可调用者在应用程序能获得的扩展的服务之前被传入。如果传入的对象和最开始服务器/网关提供给应用程序的不一样，则它就不能保证正确运转并且必须拒绝给应用程序提供扩展的服务。</p>
+<p>这些指南同样适用于中间件，中间件添加类似解析过的cookies信息，表单变量，会话sessions，或者类似<code>evniron</code>。特别地，这样的中间件提供的这些特性应当像操作<code>environ</code>的函数那样，而不仅仅是简单地往<code>evniron</code>里面填充值。这样有助于保证来自信息是从<code>evniron</code>里计算得来的，在所有中间件完成每一个URL重写或对<code>evniron</code>做的其它修改之后。</p>
+<p>服务器/网关和中间件的开发者们遵守这些“安全扩展”规则是非常重要的，否则以后就可能出现中间件的开发者们为了确保应用程序使用他们扩展的中间件时不被绕过， 而不得不从<code>environ</code>中删除一些或者全部的扩展API这样的事情。</p>
+<h3 id="应用程序配置-application-configuration">应用程序配置 (Application Configuration)<a class="headerlink" href="#应用程序配置-application-configuration" title="Permanent link">#</a></h3>
+<p>这份规范没有定义一个服务器如何选择/获得一个应用程序来调用。因为这和其他一些配置选项一样都是高度取决于服务器的。我们期望那些服务器/网关的作者们能关心并且负责将这些事情文档化：比如如何配置服务器来执行一个特定的应用程序对象，以及需要带什么样的参数（如线程的选项）。</p>
+<p>另一方面，Web框架的作者应当关心这些事情并将它们文档化：比如应该怎样创建一个包装了框架功能的应用程序对象。而已经选定了服务器和应用程序框架的用户，必须将这两者连接起来。然而，现在由于Web框架和服务器有了两者之间共同的接口，使得这一切变成了一个机械式的问题，而不再是为了将新的应用程序和服务器配对组合的重大工程了。</p>
+<p>最后，一些应用程序，框架，和中间件可能希望使用<code>evniron</code>字典来接受一些简单的字符串配置选项。服务器和网关应当通过允许应用程序部署者向<code>evniron</code>字典里指定特殊的名-值对（name-value pairs）对来支持这些。最简单的例子是，由于部署者原则上可以配置这些外部的信息到服务器上，或者在CGI的情况下它们可能是通过服务器的配置文件来设置。所以，可以仅仅从<code>os.environ</code>中复制操作系统提供的所有环境变量到<code>environ</code>字典中就可以了。</p>
+<p>应用程序本身应该尽量保持所需要的变量个数最少，因为并不是所有的服务器都支持简单地配置它们。当然，即使在最槽糕的情况下，部署一个应用程序的人还可以通过创建一个脚本来提供一些必要的选项值：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">the_app</span><span class="w"> </span><span class="kn">import</span> <span class="n">application</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="k">def</span><span class="w"> </span><span class="nf">new_app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;the_app.configval1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;something&#39;</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="k">return</span> <span class="n">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+</code></pre></div>
+<p>但是，大多数现有的应用程序和框架很大可能只需用到<code>environ</code>里面的唯一一个配置值，用来指示它们的应用程序或框架特有的配置文件位置（当然，应用程序应当缓存这些配置，以避免每次调用都重复读取）。</p>
+<h3 id="url的重建-url-reconstruction">URL的重建 (URL Reconstruction)<a class="headerlink" href="#url的重建-url-reconstruction" title="Permanent link">#</a></h3>
+<p>如果应用程序希望重建一个请求的完整URL，可以使用下面的算法，该算法由lan Bicking <strong>[译者注：pip、virtualenv 的作者]</strong> 提供：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">urllib</span><span class="w"> </span><span class="kn">import</span> <span class="n">quote</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">url</span> <span class="o">=</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.url_scheme&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;://&#39;</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="k">if</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;HTTP_HOST&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">url</span> <span class="o">+=</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;HTTP_HOST&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">url</span> <span class="o">+=</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SERVER_NAME&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="k">if</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.url_scheme&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;https&#39;</span><span class="p">:</span>
+<span class="linenos" data-linenos="10 "></span>        <span class="k">if</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SERVER_PORT&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;443&#39;</span><span class="p">:</span>
+<span class="linenos" data-linenos="11 "></span>           <span class="n">url</span> <span class="o">+=</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SERVER_PORT&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="k">if</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SERVER_PORT&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;80&#39;</span><span class="p">:</span>
+<span class="linenos" data-linenos="14 "></span>           <span class="n">url</span> <span class="o">+=</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SERVER_PORT&#39;</span><span class="p">]</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span><span class="n">url</span> <span class="o">+=</span> <span class="n">quote</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SCRIPT_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="linenos" data-linenos="17 "></span><span class="n">url</span> <span class="o">+=</span> <span class="n">quote</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PATH_INFO&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+<span class="linenos" data-linenos="18 "></span><span class="k">if</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;QUERY_STRING&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="n">url</span> <span class="o">+=</span> <span class="s1">&#39;?&#39;</span> <span class="o">+</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;QUERY_STRING&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>注意，通过这种方式重建出来的URL可能跟客户端真实发过来的URI有些许差别。举个例子，服务器的重写规则有可能会对客户端发来的最初请求的URL做修改，以便让它看起来更规范。</p>
+<h3 id="对旧版本python22之前的支持-supporting-older-versions-of-python">对旧版本Python(2.2之前)的支持 (Supporting Older Versions of Python)<a class="headerlink" href="#对旧版本python22之前的支持-supporting-older-versions-of-python" title="Permanent link">#</a></h3>
+<p>有些服务器、网关或者应用程序可能希望对Python2.2之前的版本提供支持。这在目标平台是Jython时甚是如此，因为在我写这篇文档的时候，还没有一个生产版本的Jython 2.2。</p>
+<p>对于服务器和网关来说，这是相当容易做到的：准备使用Python 2.2之前的版本的服务器和网关，只需要简单地限定它们自己只使用标准的“for”循环来迭代应用程序返回来的所有可迭代对象<code>(iterable)</code>即可。这是能在代码级别确保2.2之前的版本的迭代器协议(后续会讲)跟“现在的”迭代器协议（参照 <a href="https://www.python.org/dev/peps/pep-0234/">PEP234</a> ）兼容的唯一方法。</p>
+<p>（需要注意的是，这个技巧当然只针对那些由Python写的服务器，网关，或者中间件。至于如何正确地在其他语言写的服务器中使用迭代器协议则不在我们这份PEP的讨论范围之内）</p>
+<p>不过，对于应用程序这边来说，要提供对Python2.2之前的版本的支持则会稍微复杂些：</p>
+<ul>
+<li>由于Python 2.2之前，文件并不是可迭代的，故你不能返回一个文件对象并期望它能像一个可迭代者那样工作。（总体来说，你也不能这么做，因为大部分情况下这样做的表现很糟糕）。可以使用<code>wsgi.file_wrapper</code>或者一个应用程序特有的文件包装类。（请参考 <a href="./#optional">可选的平台相关的文件处理</a> 章节获取更多关于<code>sgi.file_wrapper</code>的信息，该章节包含一个怎么把一个文件包装成一个可迭代者的例子）</li>
+<li>如果你想返回一个定制加工过的可迭代者，那么它必须实现2.2版本之前的迭代器协议。也就是说，提供一个<code>__getitem__</code>方法来接收一个整形的键值，然后在所有数据都取完的时候抛出一个<code>IndexError</code>异常。（注意，直接使用内置的序列类型也是可行的，因为它也实现了这个迭代器协议。)</li>
+</ul>
+<p>最后，如果中间件也希望对Python2.2之前的版本提供支持，迭代应用程序返回的所有值或者由它自己返回一个可迭代者（又或者是两者都有），那么这些中间件必须遵循以上提到的这些建议。</p>
+<p>（另外，为了支持Python2.2之前的版本，毫无疑问，任何服务的、网关、应用程序或者中间件必须只能使用该版本有的语言特性，比如用1和0，而不是True和False，诸如此类。)</p>
+<h3 id="可选的平台相关文件处理-optional-platform-specific-file-handling">可选的平台相关文件处理 (Optional Platform-Specific File Handling)<a class="headerlink" href="#可选的平台相关文件处理-optional-platform-specific-file-handling" title="Permanent link">#</a></h3>
+<p>有些操作环境提供了特殊的高性能文件传输机制，比如Unix下的<code>sendfile()</code>方法。服务器和网关可以通过<code>environ</code>变量中的 <code>wsgi.file_wrapper</code> 这个选项来使用这个机制。应用程序可以使用这样的“文件包装（file wrapper）”来将一个文件或者类文件对象（file-like object ）转换为一个可迭代者然后返回它。例如：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">if</span> <span class="s1">&#39;wsgi.file_wrapper&#39;</span> <span class="ow">in</span> <span class="n">environ</span><span class="p">:</span>
+<span class="linenos" data-linenos="2 "></span>    <span class="k">return</span> <span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.file_wrapper&#39;</span><span class="p">](</span><span class="n">filelike</span><span class="p">,</span> <span class="n">block_size</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">filelike</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">block_size</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>如果一个服务器或网关有提供<code>wsgi.file_wrapper</code>选项，则它必须是个可调用对象<code>(callable)</code>，并且这个可调用者接受一个必要的位置参数，和一个可选的位置参数。第一个参数是将要发送的类文件对象，第二个参数是可选的，表示分块大小（block size）的建议（这个服务器/网关无需使用）。这个可调用者必须返回一个可迭代的对象（iterable object），并且在服务器/网关真正从应用程序那里接收到了一个可迭代者作为返回值之前，不能执行任何的数据传送（否则会阻碍中间件解析或覆盖响应数据（response data））。</p>
+<p>至于那个由应用程序提供的被当作是类文件的对象，它则必须拥有一个<code>read()</code>方法并接受一个可选的size参数。它可能还需要有一个<code>close()</code>方法，如果有，那么由<code>wsgi.file_wrapper</code>返回的可迭代者它必须有一个<code>close()</code>方法可以调用最初的类文件对象中的<code>close()</code>方法。如果这个“类文件“对象还拥有任何的方法或属性与Python内置的文件对象的属性或方法名相同（例如<code>fileno()</code>），那么<code>wsgi.file_warpper</code>可能会假设这些方法或属性跟Python内置的文件对象的语义（semantics）是相同的。</p>
+<p>在真实的实现中，任何平台相关的的文件处理都必须发生在应用程序返回之后，接着服务器/网关会去检查一个包装对象（wrapper object）是否有返回。（再次声明，由于存在中间件，错误处理等等类似的东西，所以并不保证任何生成的包装（wrapper）会被真正地使用到）</p>
+<p>除了处理<code>close()</code>方法，从语义上讲，应用程序返回一个包装的文件（file wrapper ）应当看起来就像是应用程序返回了一个可迭代者<code>iter(filelike.read, '')</code>一样。换句话说，当传输开始的时候，应当从文件的当前位置开始传输，并且继续直到最后完成。</p>
+<p>当然，平台相关的文件传输API通常不接受随意的类文件对象，所以，一个<code>wsgi.file_wrapper</code>为了判断类文件对象是否适用于支持的平台相关的API，不得不对提供的对象做一些类似<code>fileno()</code>（类Unix 平台下）或者是<code>java.nio.FileChannel</code>（Jython下）的自省检查。</p>
+<p>注意：即使对象不适用与特定的平台API，<code>wsgi.file_wrapper</code>必须仍旧返回一个包装了的<code>read()</code>和<code>close()</code>的迭代，因此应用程序使用这文件包装器便可以再不同平台间移植。这里有个简单的平台无关的文件包装类，适应于旧的（2.2之前）和新的Python，如下：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">class</span><span class="w"> </span><span class="nc">FileWrapper</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filelike</span><span class="p">,</span> <span class="n">blksize</span><span class="o">=</span><span class="mi">8192</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 4 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">filelike</span> <span class="o">=</span> <span class="n">filelike</span>
+<span class="linenos" data-linenos=" 5 "></span>        <span class="bp">self</span><span class="o">.</span><span class="n">blksize</span> <span class="o">=</span> <span class="n">blksize</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">filelike</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 7 "></span>            <span class="bp">self</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">filelike</span><span class="o">.</span><span class="n">close</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<span class="linenos" data-linenos="10 "></span>        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filelike</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blksize</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+<span class="linenos" data-linenos="12 "></span>            <span class="k">return</span> <span class="n">data</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="k">raise</span> <span class="ne">IndexError</span>
+</code></pre></div>
+<p>这里是一段来自服务器/网关的小程序，它提供了访问一个特定平台的API的办法：</p>
+<div class="highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;wsgi.file_wrapper&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FileWrapper</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">result</span> <span class="o">=</span> <span class="n">application</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">FileWrapper</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="c1"># 检查 result.filelike 是否为可用的 w/platform-specific API，</span>
+<span class="linenos" data-linenos=" 7 "></span>        <span class="c1"># 如果是，则使用该API来传送结果。</span>
+<span class="linenos" data-linenos=" 8 "></span>        <span class="c1"># 如果不是，则按正常情况循环处理可迭代者(iterable)。</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span>    <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="c1"># etc.</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span><span class="k">finally</span><span class="p">:</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">):</span>
+<span class="linenos" data-linenos="15 "></span>        <span class="n">result</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="问答环节-questions-and-answers">问答环节 (Questions and Answers)<a class="headerlink" href="#问答环节-questions-and-answers" title="Permanent link">#</a></h2>
+<ol>
+<li>
+<p>为什么<code>evniron</code>必须是字典？用子类<code>(subclass)</code>不行吗？  </p>
+<blockquote>
+<p>用字典是为了最大化地满足在服务器之间的移植性。还有另一种选择就是定义一些字典方法的子集，并以字典的方法作为标准的可移植的接口。实际上，大多数的服务器会使用满足需求的字典，但框架的作者会期待完整的字典特性，因为字典结构一般会实现这些特性。但问题是，如果有一些服务器不使用字典，尽管这类服务器也“符合”规范，还是可能会出现互操作性的问题。因此，强制使用字典可以简化规范并保证互操作性。</p>
+<p>注意，以上这些并不妨碍服务器或框架的开发者们向<code>evnrion</code>字典里加入自定义的变量来提供特殊的服务。事实上我们鼓励使用这种方式来提供任意的增值服务。</p>
+</blockquote>
+</li>
+<li>
+<p>为什么你既可以调用<code>write()</code>又可以生成<code>(yield)</code>字符串/返回一个可迭代对象<code>(iterable)</code>？我们难道不应该只选择一种方式吗？</p>
+<blockquote>
+<p>如果我们仅支持迭代的方法，那么现存的那些假定“推模式<code>(push)</code>”的框架就很难实现本规范。但是，如果我们只支持通过<code>write()</code>的推模式，那么服务器在做大文件传输这类任务时就会出现性能下降（如果工作线程<code>(worker)</code>没有将所有的输出都发送完成，它就无法处理新请求）。因此，我们做这样的妥协，好处是允许应用程序根据实际情况选择这两种方法，并且比起单纯的<strong>push-only</strong>的方式来说，只会给那些服务器的实现者们增加一点点负担而已。</p>
+</blockquote>
+</li>
+<li>
+<p><code>close()</code>方法是拿来做什么的？</p>
+<blockquote>
+<p>在应用程序执行期间，当写操作<code>(writes)</code>完成之后，应用程序可以通过一个<code>try/finally</code>代码块来确保资源都被释放了。但是，如果应用程序返回一个可迭代对象<code>(iterable)</code>，那么在迭代器被垃圾收集器收集之前任何资源都不会被释放。这里的<code>close()</code>惯用法允许应用程序在一个请求完成后释放重要资源，并且向前兼容<a href="https://www.python.org/dev/peps/pep-0325/">PEP 325</a>里<code>try/finally</code>与生成器的用法。</p>
+</blockquote>
+</li>
+<li>
+<p>为什么这个接口要设计地这么初级？我希望添加更多酷炫的功能！（比如cookies、会话<code>(sessions)</code>、持久性<code>(persistence)</code>，等等)</p>
+<blockquote>
+<p>记住，这并不是另一个Python的web框架，这仅仅是一个框架向web服务器通信的方法，反之亦然。如果你想拥有上面所说的这些特性，你需要选一个提供了这些特性的框架。并且如果这个框架让你创建一个WSGI应用程序，你将可以让它跑在大多数支持WSGI的服务器上面。同样的，一些WSGI服务器或许会通过在它们的<code>environ</code>字典里提供的对象来提供一些额外的服务；可以参阅这些服务器具体的文档了解详情。（当然，使用这类扩展的应用程序将面临着无法移植到其他基于WSGI的服务器上的风险）</p>
+</blockquote>
+</li>
+<li>
+<p>为什么使用CGI的变量而不是旧的HTTP头呢？并且为什么将它们和WSGI定义的变量混在一起呢？  </p>
+<blockquote>
+<p>许多现有的框架很大程度上是建立在CGI规范基础上的，并且现有的web服务器知道如何生成CGI变量。相比之下，使用另一种表示HTTP入站信息的方式只会使市场更加碎片化并降低市场份额。因此使用CGI“标准”看起来是个不错的办法，它能最大化重用已有的实现。如果不将它们同WSGI变量混合在一起，就需要传入两个字典参数，这什么显而易见的好处。</p>
+</blockquote>
+</li>
+<li>
+<p>那关于状态字符串，我们可不可以仅仅使用数字来代替，比如说传入“200”而不是“200 OK”？</p>
+<blockquote>
+<p>这样做会使服务器和网关变得复杂化，因为如果这样做的话服务器或网关就需要一个数值状态和相应信息的映射表。相比之下，让应用程序或框架的作者们在他们处理专门的响应代码时顺便输入一些额外的信息则显然要简单地多，并且事实上，经常是现有的框架已经有一个这样的映射表包含这些需要的信息了。总之，权衡之后，我们认为这个让应用程序和框架来负责要比服务器和网关来负责要更适合些。  </p>
+</blockquote>
+</li>
+<li>
+<p>为什么<code>wsgi.run_once</code>不能保证app仅仅运行一次？</p>
+<blockquote>
+<p>因为它仅仅只是建议应用程序应当“装备妥当但不需要经常性地运行（rig for infrequent running）”。这是因为应用程序框架在操作缓存、会话这些东西的时候有多种模式。在“多重运行（Multiple Run）”模式下，框架可能会预先加载缓存，并且在每个请求之后可能不会有写操作，比如写日志或会话数据到硬盘上等操作。在“单运行（single run）”模式下，框架没有预加载，避免了在每一个请求之后刷新（flush）所有必要的写操作。  </p>
+<p>然而，为了验证在后者的模式下应用程序或框架的正确操作，可能会必要地（或是权宜之计）不止一次调用它。因此，一个应用程序不应当仅仅因为设置了<code>wsgi.run_once</code>为True就认定它肯定不会被再次运行。</p>
+</blockquote>
+</li>
+<li>
+<p>在应用程序代码里使用Feature X（字典<code>(dictionaries)</code>，可调用对象<code>(callables)</code>等等）这些特性显得很丑陋，难道我们不可以使用对象来代替吗？</p>
+<blockquote>
+<p>WSGI中这些所有特性的实现选择都是为了从另外一个特性中解耦合考虑的；将这些特性重新组装到一个封装完好了的对象之中只会在一定程度上增大写服务器/网关的难度，并且在将来希望写一个中间件来只代替/修改一小部分整体功能的时候，难度会上升一个数量级。</p>
+<p>本质上，中间件希望有个“职责连”的模式，凭借这个模式它可以在一些功能中被看成是一个“handler”，而同时允许其他功能保持不变。这样的要求，在接口想要保持可扩展性的前提下，用普通的Python对象是比较难实现的。例如，你必须使用<code>__getattr__</code>或者<code>__getattribut__</code>的重写（override）来确保这些扩展（比如未来的WSGI版本定义的变量）是被通过的。</p>
+<p>这种类型的代码是出了名的难以保证100%正确的，并且极少人愿意自己重写。他们倾向于简单地复用别人的实现，可是一旦别人修改了实现的另一处地方时他们却未能及时更新自己的拷贝。  </p>
+<p>进一步讲，这种必需的样本代码将是纯碎的消费税，一种纯粹由中间件开发者们承担的开发者消费税，它的目的仅仅是为了能给应用程序框架开发者们支持支持稍微“漂亮”点儿的API而已。但是，应用框架开发者们往往只会更新一个框架来支持WSGI，这只占他们所有框架的非常有限的部分。这很可能是他们的第一个（也可能是唯一一个）WSGI实现，因此他们很有可能去实现这份现成的规范。这样，花时间利用对象的属性或诸如此类的东西让这些API看起来"更漂亮"，对正在读此文的您们来说，可能就是浪费时间。</p>
+<p>我们鼓励那些希望在直接的Web应用程序编程（相对于web框架开发）中有更漂亮的（或是改进的）WSGI接口的人，鼓励他们去开发APIs或者框架来包装WSGI，使WSGI对那些应用程序开发者们更加便利。这样的话，WSGI就不仅可以在底层维持对服务器或中间件的便利性，同时对应用程序开发者来说又不会显得太“丑陋”。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="尚在讨论中的提议-proposedunder-discussion">尚在讨论中的提议 (Proposed/Under Discussion)<a class="headerlink" href="#尚在讨论中的提议-proposedunder-discussion" title="Permanent link">#</a></h2>
+<p>下面这些项都还正在Web-SIG或其他地方讨论中，或者说还在PEP作者的计划清单中：</p>
+<ul>
+<li><code>wsgi.input</code>是否改成一个迭代器而不是一个文件？这对于那些异步应用程序和分块编码（ chunked-encoding）的输入流是有帮助的。   </li>
+<li>我们正在讨论可选的扩展，它们将用来暂停一个应用程序输出的迭代，直到输入可用或者发生一个回调事件。</li>
+<li>添加一个章节，关于同步 vs 异步应用程序和服务器，相关的线程模型，以及这方面的问题/设计目标。</li>
+</ul>
+<h2 id="鸣谢-acknowledgements">鸣谢 (Acknowledgements)<a class="headerlink" href="#鸣谢-acknowledgements" title="Permanent link">#</a></h2>
+<p>感谢那些Web-SIG邮件组里面的人，没有他们周全的反馈，将不可能有我这篇修正草案。特别地，我要感谢：   </p>
+<ul>
+<li><code>mod_python</code>的作者Gregory “Grisha” Trubetskoy，是他毫不留情地指出了我的第一版草案没有提供任何比“普通旧版的CGI”有优势的地方，他的批评促进了我去寻找更好的方法。    </li>
+<li>Ian Bicking，是他总是唠叨着要我适当地提供多线程（multithreading）及多进程（multiprocess）相关选项，对了，他还不断纠缠我让我提供一种机制可以让服务器向应用程序提供自定义的扩展数据。  </li>
+<li>Tony Lownds，是他提出了<code>start_response</code>函数的概念，提供给它status和headers两个参数然后返回一个write函数。他的这个想法为我后来设计异常处理功能提供了灵感，尤其是在考虑到中间件重写(overrides)应用程序的错误信息这方面。  </li>
+<li>Alan Kennedy, 一个有勇气去尝试实现<code>WSGI-on-Jython</code>（在我的这份规范定稿之前）的人，他帮助我形成了 <a href="./#对Python2.2之前的版本的支持">对Python2.2之前的版本的支持</a> 这一章节，以及可选的<code>wsgi.file_wrapper</code>套件。  </li>
+<li>Mark Nottingham，是他为这份规范的HTTP RFC 发行规范做了大量的后期校对工作，特别针对HTTP/1.1特性，没有他的指出，我甚至不知道有这东西存在。</li>
+</ul>
+<h2 id="参考文献-references">参考文献 (References)<a class="headerlink" href="#参考文献-references" title="Permanent link">#</a></h2>
+<ol>
+<li><a href="https://wiki.python.org/moin/WebProgramming" title="The Python Wiki &quot;Web Programming&quot; topic">The Python Wiki "Web Programming" topic</a></li>
+<li><a href="http://ken.coar.org/cgi/draft-coar-cgi-v11-03.txt" title="The Common Gateway Interface Specification, v 1.1, 3rd Draft">The Common Gateway Interface Specification, v 1.1, 3<sup>rd</sup> Draft</a></li>
+<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1" title="&quot;Chunked Transfer Coding&quot; -- HTTP/1.1, section 3.6.1">"Chunked Transfer Coding" -- HTTP/1.1, section 3.6.1</a></li>
+<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.5.1" title="&quot;End-to-end and Hop-by-hop Headers&quot; -- HTTP/1.1, Section 13.5.1">"End-to-end and Hop-by-hop Headers" -- HTTP/1.1, Section 13.5.1</a></li>
+<li><a href="http://www.modssl.org/docs/2.8/ssl_reference.html#ToC25" title="mod_ssl Reference, &quot;Environment Variables&quot;">mod_ssl Reference, "Environment Variables"</a></li>
+</ol>
+<h2 id="版权-copyright">版权 (Copyright)<a class="headerlink" href="#版权-copyright" title="Permanent link">#</a></h2>
+<p>本文档已发布到<a href="https://github.com/python/peps/blob/master/pep-0333.txt">公开区域</a>。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.top", "search.highlight"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>
